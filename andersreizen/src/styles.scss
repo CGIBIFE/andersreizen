@@ -1,1 +1,79 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'lato-normal';
+  src: url("assets/Lato/Lato-Black.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'lato-black-italic';
+  src: url("assets/Lato/Lato-Blackitalic.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'lato-bold';
+  src: url("assets/Lato/Lato-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'lato-bold-italic';
+  src: url("assets/Lato/Lato-Bolditalic.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'lato-italic';
+  src: url("assets/Lato/Lato-italic.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'lato-light';
+  src: url("assets/Lato/Lato-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'lato-light-italic';
+  src: url("assets/Lato/Lato-Lightitalic.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'lato-regular';
+  src: url("assets/Lato/Lato-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'lato-thin';
+  src: url("assets/Lato/Lato-Thin.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'lato-thin-italic';
+  src: url("assets/Lato/Lato-Thinitalic.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.and-h1{
+  font-family: lato-light;
+  font-size: 40px;
+  color: #0B3C82;
+}
+
+body{
+  padding: 0;
+  margin: 0;
+}
