@@ -1,0 +1,27 @@
+.data-invoer-container {
+  padding: 18px;
+  .tab-content {
+    padding:15px;
+  }
+}
+app-tab-panel, app-panel, .tab-content {
+  width: 100%;
+}
+.icon {
+  margin-right: 10px;
+}
+.inline-fields {
+
+  border-bottom: 2px solid #DDDDDD;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.total {
+  p {
+    margin-bottom: 3px;
+  }
+  h5 {
+    margin-bottom: 15px;
+  }
+}

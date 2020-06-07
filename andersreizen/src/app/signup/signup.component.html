@@ -1,0 +1,19 @@
+<div>
+    <form>
+        <div class="inline-fields">
+        <app-input-field label="Voornaam:" placeholder="John" type="text"></app-input-field>
+        <app-input-field label="Achternaam:" placeholder="Doe" type="text"></app-input-field>
+        </div>
+        <app-input-field label="Bedrijfsnaam:" placeholder="CGI Netherland" type="text"></app-input-field>
+        <app-input-field label="Email:" placeholder="johndoe@cgi.com" type="email"></app-input-field>
+        <app-input-field label="Wachtwoord:" placeholder="*********" type="password"></app-input-field>
+        <app-input-field label="Herhaal wachtwoord:" placeholder="********" type="password"></app-input-field>
+        <div class="mt-3">
+            <app-button text="Registreren"></app-button>
+        </div>
+        <app-separator></app-separator>
+        <div class="mt-3">
+            <app-button type="opec" text="Inloggen" (click)="goto('login')"></app-button>
+        </div>
+    </form>
+</div>

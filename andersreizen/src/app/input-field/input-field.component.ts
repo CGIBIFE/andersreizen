@@ -10,6 +10,9 @@ export class InputFieldComponent implements OnInit {
   @Input() label: string
   @Input() placeholder: string
   @Input() type: string
+  @Input() unit: string
+  @Input() disabled: boolean
+  @Input() value: string
   constructor() { }
 
   ngOnInit() {

@@ -1,0 +1,18 @@
+
+.home {
+  .logo {
+    margin-top: 160px;
+    img {
+      max-width: 248px;
+    }
+  }
+  .full-wall{
+    width: 100%;
+    height: 100vh;
+    background: url("../../assets/wall.png") ;
+    background-size: cover;
+  }
+  .form-container{
+    margin-top: 50px;
+  }
+}

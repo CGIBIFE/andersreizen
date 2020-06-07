@@ -1,0 +1,17 @@
+.separator-container {
+  display: flex;
+  margin-top: 10px;
+}
+.line {
+  border-top: thin solid #BDBDBD;
+  border-bottom: thin solid #BDBDBD;
+  width: 25%;
+  height: 1px;
+  display: block;
+  margin: 15px;
+}
+.text {
+  color: #BDBDBD;
+  font-family: lato-regular;
+  font-size: 16px;
+}

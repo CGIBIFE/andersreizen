@@ -1,8 +1,9 @@
-<span>
+<span [ngClass]="unit ? 'input-group' : 'input-container'">
     <div>
         <label>
             {{label}}
         </label>
     </div>
-    <input [type]="type" [placeholder]="placeholder"/>
+    <input [type]="type" [value]="value" [placeholder]="placeholder" [disabled]="disabled" [ngClass]="unit ? 'unit-input' : 'normal'"/>
+    <span class="unit" *ngIf="unit">{{unit}}</span>
 </span>

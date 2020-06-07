@@ -1,0 +1,44 @@
+.full-height {
+  height: 100vh;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+
+}
+.menu-container{
+  padding-top: 50px;
+}
+.parent {
+  min-height: 100px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  .icon{
+    width: 15px;
+    height: 15px;
+      img {
+        width: 15px;
+      }
+  }
+  li{
+    height: 50px;
+    width: 100%;
+    list-style: none;
+    padding-top: 19px;
+    display: flex;
+    cursor: pointer;
+
+    .menu-item{
+      letter-spacing: 0px;
+      color: #0B3C82;
+      font-size: 14px;
+      margin-left: 10px;
+      font-family: lato-regular;
+      padding-top: 3px;
+    }
+  }
+  .heading {
+    font-family:lato-bold;
+    font-size: 16px;
+    letter-spacing: 0px;
+    color: #0B3C82;
+  }
+}

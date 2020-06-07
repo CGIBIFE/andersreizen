@@ -1,0 +1,100 @@
+<div class="data-invoer-container">
+    <div class="row">
+        <img src="assets/Icon%20awesome-charging-station.svg" class="icon"/>
+        <h1 class="and-h1-normal">Mobiliteitsfootprint</h1>
+    </div>
+    <div class="row">
+
+        <app-tab-panel>
+            <div class="tab-content">
+                <div class="row ">
+                    <div class="col-8 p-0">
+                        <app-panel size="5">
+                            <app-input-field label="Rapportagejaar:" placeholder="2019" value="2019"></app-input-field>
+                        </app-panel>
+
+                    </div>
+                </div>
+                <div class="row " *ngFor="let data of data_invoer; let i = index">
+                    <div class="col-8 p-0 mt-4">
+                        <app-content-panel [title]="data.wagenparkType">
+                            <div class="row p-4">
+                                                           <span *ngFor="let fuelType of data.fuelType">
+                                                          <h2 class="and-h2-normal">{{fuelType.type}}</h2>
+                                                            <div class="col-12">
+                                                                <div class="inline-fields">
+                                                                   <app-input-field type="text" label="Aantal:"
+                                                                                    placeholder="5747"
+                                                                                    [value]="fuelType.Aantal"></app-input-field>
+                                                                   <app-input-field type="text" label="Kilometrage:"
+                                                                                    [value]="fuelType.Kilometrage"
+                                                                                    placeholder="7667786.78"
+                                                                                    unit="KM"></app-input-field>
+                                                                   <app-input-field type="text" label="Consumptie:"
+                                                                                    placeholder="56766.78"
+                                                                                    [value]="fuelType.Consumptie"
+                                                                                    unit="LTR"></app-input-field>
+                                                                  <app-input-field type="text" label="Factor:"
+                                                                                   placeholder="2.74 kg CO2eq/ltr"
+                                                                                   [value]="fuelType.Factor"
+                                                                                   disabled="true"></app-input-field>
+                                                                  <app-input-field type="text" label="Emissie (CO2eq):"
+                                                                                   placeholder="14209,31 ton"
+                                                                                   [value]="fuelType['Emissie (CO2eq)']"
+                                                                                   disabled="true"></app-input-field>
+                                                             </div>
+                                                         </div>
+                                                             </span>
+                            </div>
+                        </app-content-panel>
+                    </div>
+                    <div class="col-3 p-0 ml-5 mt-4 " >
+                    <div style="display: flex; flex: 1 1 100%; flex-direction: column">
+                        <app-content-panel title="Informatie over wagenpark"  *ngIf="i == 0">
+                            <p>
+                            <h6>Definitie:</h6>
+                            <p>Werkelijke reiskilometers van de woonplaats naar een vaste werkplaats en terug van alle
+                                medewerkers exclusief de medewerkers met een auto uit het wagenpark.</p>
+                            <h6>Berekening:</h6>
+                            <p>De kilometers woon-werkverkeer van onze medewerkers (exclusief d.m.v. het wagenpark)
+                                verdeeld naar onze modal split (gemiddelde wijze waarop onze medewerkers van en naar hun
+                                werk komen of thuiswerken), hetgeen bepaald is middels een representatieve enquête onder
+                                medewerkers. Het aantal kilometers woon-werkverkeer is berekend aan de hand van de
+                                afstand tussen woonplaats en standplaats en het aantal werkdagen per week. Door deze
+                                afstand te vermenigvuldigen maal 2 ontstaat de retourafstand per week. Vervolgens wordt
+                                deze retourafstand vermenigvuldigd met het gemiddeld aantal werkdagen van een FTE. (max
+                                werkdagen per jaar: 260 minus gemiddeld verlofdagen: 38 minus aantal feestdagen: 7
+                                resulteert in het gemiddeld aantal werkdagen per FTE: 215 per jaar) </p>
+                            <h6>Benodigdheden:</h6>
+                            <span>
+                            <ol>
+                                <li>afstand woonplaats naar vaste werkplaats per medewerkers</li>
+                                <li>aantal contractdagen of FTE per medewerker</li>
+                                <li> mobiliteitsenquete</li>
+                                <li> Indien enquete niet mogelijk, gebruik CBS cijfers (zie: tab_5)</li>
+                            </ol>
+                            </span>
+
+                        </app-content-panel>
+                        <app-content-panel title="Total" style="bottom: 0px;position: absolute;width:100%;">
+                            <span class="total">
+                            <h5>Totaal geel kenteken</h5>
+                            <p>Aantal:</p>
+                            <h5>3.948</h5>
+                            <p>Kilometrage:</p>
+                            <h5>153.462.876.49 km</h5>
+                            <p>Emissie (CO2eq):</p>
+                            <h5>17.390,45 ton</h5>
+                            </span>
+                        </app-content-panel>
+                    </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </app-tab-panel>
+
+    </div>
+
+</div>

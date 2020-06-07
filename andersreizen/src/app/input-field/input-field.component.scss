@@ -1,17 +1,49 @@
+
 input {
-  width: 100%;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border: 1px solid #DDDDDD;
   border-radius: 4px;
   padding: 3px 9px;
   font-family: lato-regular;
-  max-width: 450px ;
+  max-width: 450px;
   height: 45px;
   margin-bottom: 10px;
 }
+input:disabled {
+  background: #ECEEEF;
+}
+
+.unit-input {
+  width: 75%;
+  border-right: 0px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.normal {
+  width: 100%;
+}
+
 label {
   color: #373A3C;
-  font-size: 16px;
+  font-size: 14px;
   font-family: lato-regular;
   margin-bottom: 3px;
+
 }
+
+.unit {
+  width: 25%;
+  height: 45px;
+  background: #ECEEEF 0% 0% no-repeat padding-box;
+  border: 1px solid #DDDDDD;
+  display: flex;
+  border-radius: 4px;
+  font-size: 12px;
+  padding-top: 12px;
+  padding-left: 10px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  color: #55595C;
+}
+
+
