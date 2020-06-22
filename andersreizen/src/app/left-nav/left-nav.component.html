@@ -2,12 +2,12 @@
     <div class="menu-container">
 <div class="parent">
     <span class="heading">INTRO</span>
-    <li (click)="goto('user/intro')"><span class="icon"><img src="assets/Icon%20ionic-md-paper.svg"></span><span class="menu-item">Introductie</span></li>
+    <li (click)="goto('user/intro');selectedmenu='intro'" [ngClass]="selectedmenu === 'intro' && 'selected'"><span class="icon"><img [attr.src]="selectedmenu ==='intro' ? 'assets/Icon ionic-md-paper-white.svg':'assets/Icon ionic-md-paper.svg'"></span><span class="menu-item">Introductie</span></li>
     <li><span class="icon"><img src="assets/Icon%20awesome-grip-lines.svg"></span><span class="menu-item">Richtlijnen</span></li>
 </div>
 <div class="parent">
     <span class="heading">DATA INVOER</span>
-        <li (click)="goto('user/data-invoer')"><span class="icon"><img src="assets/Icon%20awesome-charging-station.svg"></span><span class="menu-item">Mobiliteitsfootprint</span></li>
+        <li (click)="goto('user/data-invoer');selectedmenu='Mobiliteitsfootprint'" [ngClass]="selectedmenu === 'Mobiliteitsfootprint' && 'selected'"><span class="icon"><img [attr.src]="selectedmenu ==='Mobiliteitsfootprint' ? 'assets/Icon awesome-charging-station-white.svg' : 'assets/Icon%20awesome-charging-station.svg'"></span><span class="menu-item">Mobiliteitfootprint</span></li>
 </div>
     <div class="parent">
         <span class="heading">OVERIGE</span>

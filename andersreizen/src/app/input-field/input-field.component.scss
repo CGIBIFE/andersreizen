@@ -12,7 +12,9 @@ input {
 input:disabled {
   background: #ECEEEF;
 }
-
+input.ng-invalid.ng-dirty {
+  border: thin solid #CB2E25;
+}
 .unit-input {
   width: 75%;
   border-right: 0px;

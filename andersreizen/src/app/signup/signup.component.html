@@ -1,19 +1,23 @@
 <div>
-    <form>
+    <div [ngClass]="alertType === 'FAIL' ? 'alert alert-danger': 'alert alert-success'" role="alert" *ngIf="showAlter" style="max-width: 450px">
+        <p>{{alertMessage}}</p>
+        <p *ngIf="alertType === 'SUCCESS'">You will be redirected to login page soon..</p>
+    </div>
+    <form (ngSubmit)="signup()" [formGroup]="SignupForm">
         <div class="inline-fields">
-        <app-input-field label="Voornaam:" placeholder="John" type="text"></app-input-field>
-        <app-input-field label="Achternaam:" placeholder="Doe" type="text"></app-input-field>
+        <app-input-field label="Voornaam:" placeholder="John" type="text" [value]="singupForm.firstName" (change)="updatefields($event, 'firstName')" [fGroup]="SignupForm" [required]="true" fieldName="voornaam" [minLength]="2"></app-input-field>
+        <app-input-field label="Achternaam:" placeholder="Doe" type="text" [value]="singupForm.lastName" (change)="updatefields($event, 'lastName')" [fGroup]="SignupForm" [required]="true" fieldName="achternaam" [minLength]="2"></app-input-field>
         </div>
-        <app-input-field label="Bedrijfsnaam:" placeholder="CGI Netherland" type="text"></app-input-field>
-        <app-input-field label="Email:" placeholder="johndoe@cgi.com" type="email"></app-input-field>
-        <app-input-field label="Wachtwoord:" placeholder="*********" type="password"></app-input-field>
-        <app-input-field label="Herhaal wachtwoord:" placeholder="********" type="password"></app-input-field>
+        <app-input-field label="Bedrijfsnaam:" placeholder="CGI Netherland" type="text" [value]="singupForm.businessName" (change)="updatefields($event, 'businessName')" [fGroup]="SignupForm" [required]="true" fieldName="bedrijfsnaam" [minLength]="3"></app-input-field>
+        <app-input-field label="Email:" placeholder="johndoe@cgi.com" type="email" [value]="singupForm.email" (change)="updatefields($event, 'email')" [fGroup]="SignupForm" [required]="true" email="true" fieldName="email"></app-input-field>
+        <app-input-field label="Wachtwoord:" placeholder="*********" type="password" [value]="singupForm.password" (change)="updatefields($event, 'password')" [fGroup]="SignupForm" [required]="true" fieldName="wachtwoord" [minLength]="6"></app-input-field>
+        <app-input-field label="Herhaal wachtwoord:" placeholder="********" type="password" [value]="singupForm.repeat_password" (change)="updatefields($event, 'repeat_password')" [fGroup]="SignupForm" [required]="true" fieldName="herhaal_wachtwoord" [minLength]="6"></app-input-field>
         <div class="mt-3">
-            <app-button text="Registreren"></app-button>
+            <app-button text="Registreren" type="opec" [disabled]="SignupForm.invalid"></app-button>
         </div>
         <app-separator></app-separator>
         <div class="mt-3">
-            <app-button type="opec" text="Inloggen" (click)="goto('login')"></app-button>
+            <app-button  text="Inloggen" (click)="goto('login')" ></app-button>
         </div>
     </form>
 </div>

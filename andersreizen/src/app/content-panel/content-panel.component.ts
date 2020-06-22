@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class ContentPanelComponent implements OnInit {
 
   @Input() title: string;
+  @Input() fullTitleBar: string
   constructor() { }
 
   ngOnInit() {

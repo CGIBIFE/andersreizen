@@ -1,9 +1,9 @@
-<span [ngClass]="unit ? 'input-group' : 'input-container'">
+<span [ngClass]="unit ? 'input-group' : 'input-container'" [formGroup]="fGroup">
     <div>
         <label>
             {{label}}
         </label>
     </div>
-    <input [type]="type" [value]="value" [placeholder]="placeholder" [disabled]="disabled" [ngClass]="unit ? 'unit-input' : 'normal'"/>
+    <input [type]="type" [value]="value" [placeholder]="placeholder" [attr.disabled]="disabled" [ngClass]="unit ? 'unit-input' : 'normal'" [formControlName]="fieldName" [required]="required" [email]="type === 'email' ? true: false " [minlength]="minLength"/>
     <span class="unit" *ngIf="unit">{{unit}}</span>
 </span>

@@ -32,42 +32,92 @@
         </div>
         <div class="col-9">
             <app-content-panel title="Uw bedrijfsgegevens">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="inline-fields">
-                            <app-input-field type="text" label="E-mail:"
-                                             placeholder="Johndoe@cgi.com"></app-input-field>
-                            <app-input-field type="text" label="Telefoon:" placeholder="0612345678"></app-input-field>
+                <div [ngClass]="alertType === 'FAIL' ? 'alert alert-danger': 'alert alert-success'" role="alert" *ngIf="showAlter">
+                    <p>{{alertMessage}}</p>
+                    <p *ngIf="alertType === 'SUCCESS'">You data is saved!</p>
+                </div>
+                    <form [formGroup]="profileForm" (ngSubmit)="saveCompanyDetails()">
+                        <div class="row">
+                        <div class="col-6">
+
+                            <div class="inline-fields">
+                                <app-input-field type="text" label="E-mail:" [value]="profileField.email"
+                                                 (change)="updatefields($event,'email')"
+                                                 placeholder="Johndoe@cgi.com" [fGroup]="profileForm" [required]="true"
+                                                 fieldName="email" ></app-input-field>
+                                <app-input-field type="text" label="Telefoon:" placeholder="0612345678"
+                                                 [value]="profileField.telephone" [fGroup]="profileForm" [required]="true"
+                                                 fieldName="telefone"
+                                                 (change)="updatefields($event,'telephone')"></app-input-field>
+                            </div>
+                            <app-input-field type="text" label="Naam bedrijf of vestiging:"
+                                             [value]="profileField.companyName"
+                                             [fGroup]="profileForm" [required]="true"
+
+                                             fieldName="naam_bedrijf"
+                                             (change)="updatefields($event,'companyName')"
+                                             placeholder="CGI"></app-input-field>
+                            <app-input-field type="text" label="Branch/type organisatie:" [value]="profileField.companyType"
+                                             (change)="updatefields($event,'companyType')"
+                                             [fGroup]="profileForm" [required]="true"
+                                             fieldName="branch"
+                                             placeholder="IT Consultancy"></app-input-field>
+                            <app-input-field type="text" label="Gemiddeld FTE per jaar:" [value]="profileField.averageFte"
+                                             (change)="updatefields($event,'averageFte')"
+                                             [fGroup]="profileForm" [required]="true"
+                                             fieldName="fte"
+                                             placeholder="1587689"></app-input-field>
+                            <app-input-field type="text" label="Gemiddeld aantal auto's per jaar:"
+                                             [value]="profileField.carsAverage" (change)="updatefields($event,'carsAverage')"
+                                             [fGroup]="profileForm" [required]="true"
+                                             fieldName="aantal"
+                                             placeholder="1587689"></app-input-field>
+                            <app-input-field type="text" label="Ingevuld door:" placeholder="John Doe"
+                                             [value]="profileField.filledByName"
+                                             [fGroup]="profileForm" [required]="true"
+                                             fieldName="ingevuld_door"
+                                             (change)="updatefields($event,'filledByName')"></app-input-field>
                         </div>
-                        <app-input-field type="text" label="Naam bedrijf of vestiging:"
-                                         placeholder="0612345678"></app-input-field>
-                        <app-input-field type="text" label="Naam bedrijf of vestiging:"
-                                         placeholder="CGI Nederland"></app-input-field>
-                        <app-input-field type="text" label="Branch/type organisatie:"
-                                         placeholder="IT Consultancy"></app-input-field>
-                        <app-input-field type="text" label="Gemiddeld FTE par jaar:"
-                                         placeholder="1587689"></app-input-field>
-                        <app-input-field type="text" label="Ingevuld door:" placeholder="John Doe"></app-input-field>
-                    </div>
-                    <div class="col-6">
-                        <app-input-field type="date" label="Datum:" placeholder="28-05-2020"></app-input-field>
-                        <app-input-field type="text" label="Vestigingen:"
-                                         placeholder="Amsterdam, Rotterdam"></app-input-field>
-                        <app-input-field type="number" label="Reiskosten vergoeding woonwerk:"
-                                         placeholder="856"></app-input-field>
-                        <app-input-field type="number" label="Reiskosten vergoeding zakelijk verkeer:"
-                                         placeholder="984"></app-input-field>
-                        <app-textarea label="Voor het Leasewagenpark:"
-                                      placeholder="Corrigeer je voor de rapportage voor privegebruik? Geef toelichting"></app-textarea>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                    </div>
-                    <div class="col-6">
-                        <app-button type="opec" text="Opslaan"></app-button>
-                    </div>
-                </div>
+                        <div class="col-6">
+                            <app-input-field type="date" label="Datum:" placeholder="28-05-2020"
+                                             [value]="profileField.date"
+                                             [fGroup]="profileForm" [required]="true"
+                                             fieldName="datum"
+                                             (change)="updatefields($event,'date')"></app-input-field>
+                            <app-input-field type="text" label="Vestigingen:" [value]="profileField.location"
+                                             (change)="updatefields($event,'location')"
+                                             [fGroup]="profileForm" [required]="true"
+                                             fieldName="vestigingen"
+                                             placeholder="Amsterdam, Rotterdam"></app-input-field>
+                            <app-input-field type="number" label="Reiskosten vergoeding woonwerk:"
+                                             [value]="profileField.travelAllowance"
+                                             [fGroup]="profileForm" [required]="true"
+                                             fieldName="resikosten_vergoeding"
+                                             (change)="updatefields($event,'travelAllowance')"
+                                             placeholder="856"></app-input-field>
+                            <app-input-field type="number" label="Reiskosten vergoeding zakelijk verkeer:"
+                                             [value]="profileField.businessTrafficAllowance"
+                                             (change)="updatefields($event,'businessTrafficAllowance')"
+                                             [fGroup]="profileForm" [required]="true"
+                                             fieldName="resikosten_vergoeding_zakelijk"
+                                             placeholder="984"></app-input-field>
+                            <app-textarea label="Voor het Leasewagenpark:"
+                                          placeholder="Corrigeer je voor de rapportage voor privegebruik? Geef toelichting"
+                                          [value]="profileField.description"
+                                          [fGroup]="profileForm"
+                                          (change)="updatefields($event,'description')"></app-textarea>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                            </div>
+                            <div class="col-6">
+                                <app-button type="opec" text="Opslaan" [disabled]="profileForm.invalid"></app-button>
+                            </div>
+                        </div>
+                    </form>
+
             </app-content-panel>
         </div>
     </div>

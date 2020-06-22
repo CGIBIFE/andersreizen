@@ -1,13 +1,16 @@
 <div>
-    <form>
-        <app-input-field label="Email" placeholder="sample@some.com" type="email"></app-input-field>
-        <app-input-field label="Password" placeholder="*******" type="password"></app-input-field>
+    <form (ngSubmit)="login()" [formGroup]="LoginForm" novalidate="false" >
+        <app-input-field label="Email" placeholder="sample@some.com" type="email" [value]="loginfields.username"
+                         (change)="updateUserCred($event,'username')"  fieldName="username" [fGroup]="LoginForm" [required]="true"></app-input-field>
+        <app-input-field label="Password" placeholder="*******" type="password" [value]="loginfields.password" [required]="true" [minLength]="6"
+                         (change)="updateUserCred($event,'password')" fieldName="password" [fGroup]="LoginForm"></app-input-field>
         <div class="mt-3">
-            <app-button type="opec" text="Inloggen" (click)="goto('user')"></app-button>
-        </div>
-        <app-separator></app-separator>
-        <div class="mt-3">
-            <app-button text="Registreren" (click)="goto('signup')"></app-button>
+            <app-button type="opec" text="Inloggen" ></app-button>
         </div>
     </form>
+    <app-separator></app-separator>
+    <div class="mt-3">
+        <app-button text="Registreren" (click)="goto('/signup')"></app-button>
+    </div>
+
 </div>

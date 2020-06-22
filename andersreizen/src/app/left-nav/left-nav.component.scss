@@ -1,5 +1,5 @@
 .full-height {
-  height: 100vh;
+  height: 100%;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000029;
 
@@ -9,7 +9,6 @@
 }
 .parent {
   min-height: 100px;
-  margin-left: 20px;
   margin-bottom: 20px;
   .icon{
     width: 15px;
@@ -22,9 +21,11 @@
     height: 50px;
     width: 100%;
     list-style: none;
-    padding-top: 19px;
+    padding-top: 11px;
     display: flex;
     cursor: pointer;
+    padding-left: 35px;
+    margin-top: 10px;
 
     .menu-item{
       letter-spacing: 0px;
@@ -35,9 +36,16 @@
       padding-top: 3px;
     }
   }
+  .selected {
+    background: #0B3C82 0% 0% no-repeat padding-box;
+    .menu-item{
+      color: #fff;
+    }
+  }
   .heading {
     font-family:lato-bold;
     font-size: 16px;
+    padding-left: 35px;
     letter-spacing: 0px;
     color: #0B3C82;
   }

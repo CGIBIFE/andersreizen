@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tab-panel.component.scss']
 })
 export class TabPanelComponent implements OnInit {
-
+  private tab: number
   constructor() { }
 
   ngOnInit() {
+    this.tab = 0;
   }
 
 }

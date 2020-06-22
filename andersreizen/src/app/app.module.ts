@@ -18,7 +18,13 @@ import { DataInvoerComponent } from './data-invoer/data-invoer.component';
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { PanelComponent } from './panel/panel.component';
 import { LineComponent } from './line/line.component';
-
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpMockRequestInterceptor} from "../Interceptor/HttpMockRequestInterceptor";
+import {environment} from "../environments/environment";
+import {HttpRequestInterceptor} from "../Interceptor/HttpRequestInterceptor";
+import {AuthService} from "./service/auth.service";
+export const isMock = environment.mock;
 
 @NgModule({
   declarations: [
@@ -39,11 +45,19 @@ import { LineComponent } from './line/line.component';
     PanelComponent,
     LineComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-    ],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: isMock ? HttpMockRequestInterceptor : HttpRequestInterceptor,
+    multi: true
+  },
+  AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

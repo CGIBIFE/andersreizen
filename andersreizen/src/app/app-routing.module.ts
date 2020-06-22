@@ -7,6 +7,7 @@ import {PreLoginComponent} from './pre-login/pre-login.component'
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {IntroComponent} from "./intro/intro.component";
 import {DataInvoerComponent} from "./data-invoer/data-invoer.component";
+import {AuthGuardService} from "./service/auth-guard.service";
 
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
             {path: '', component: IntroComponent},
             {path: 'intro', component: IntroComponent},
             {path: 'data-invoer', component: DataInvoerComponent}
-        ]}
+        ],canActivate:[AuthGuardService] }
     ];
 
 @NgModule({

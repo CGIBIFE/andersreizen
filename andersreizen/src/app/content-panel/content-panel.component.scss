@@ -2,12 +2,22 @@
   background: #ECEEEF 0% 0% no-repeat padding-box;
   border: 1px solid #DDDDDD;
   border-radius: 4px 4px 0px 0px;
+  min-height: 50px;
+  font-family: lato-bold;
+  font-size: 15px;
+  padding: 10px;
+  max-width: 300px;
+  min-width: 150px;
+}
+.full-title-bar {
+  background: #ECEEEF 0% 0% no-repeat padding-box;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px 4px 0px 0px;
   height: 50px;
   font-family: lato-bold;
   font-size: 17px;
   padding: 10px;
-  max-width: 300px;
-  min-width: 150px;
+  width: 100%;
 }
 .content-block {
   background: #FFFFFF 0% 0% no-repeat padding-box;

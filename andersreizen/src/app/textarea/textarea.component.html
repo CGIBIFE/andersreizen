@@ -1,8 +1,8 @@
-<span>
+<span [formGroup]="fGroup">
     <div>
         <label>
             {{label}}
         </label>
     </div>
-    <textarea [placeholder]="placeholder"></textarea>
+    <textarea [placeholder]="placeholder" [value]="value" [formControlName]="fieldName" [required]="required"  [minlength]="minLength"></textarea>
 </span>

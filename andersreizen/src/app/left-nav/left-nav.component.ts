@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 export class LeftNavComponent implements OnInit {
 
   constructor(private router: Router) { }
-
+  selectedmenu:string = 'intro'
   ngOnInit() {
   }
 
