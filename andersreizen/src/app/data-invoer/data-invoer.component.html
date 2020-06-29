@@ -24,9 +24,12 @@
                         </div>
                     </div>
                     <div class="row " *ngFor="let data of zakelijk_reizen; let i = index">
+
                         <div class="col-8 p-0 mt-4">
                             <app-content-panel [title]="data.wagenparkType">
-                                <div class="row p-4">
+                                <span class="mb-2 offset-8" style="font-size: 12px">Velden met een <span class="red-star">*</span> zijn verplicht indien beschikbaar.</span>
+                                <div class="row pl-4 pr-2 pb-4 pt-2">
+
                                                            <span *ngFor="let fuelType of data.fuelType">
                                                           <h2 class="and-h2-normal">{{fuelType.type}}</h2>
                                                             <div class="col-12">
@@ -143,7 +146,9 @@
                     <div class="row " *ngFor="let data of woon_werkverkeer; let i = index">
                         <div class="col-8 p-0 mt-4 ml-3">
                             <app-content-panel [title]="data.wagenparkType">
-                                <div class="row p-4">
+                                <span class="mb-2 offset-8" style="font-size: 12px">Velden met een <span class="red-star">*</span> zijn verplicht indien beschikbaar.</span>
+                                <div class="row pl-4 pr-2 pb-4 pt-2">
+
                                                            <span *ngFor="let fuelType of data.fuelType">
                                                           <h2 class="and-h2-normal">{{fuelType.type}}</h2>
                                                             <div class="col-12">
@@ -265,7 +270,8 @@
                     <div class="row " *ngFor="let data of declaraties; let i = index">
                         <div class="col-8  mt-4">
                             <app-content-panel [title]="data.wagenparkType">
-                                <div class="row p-4">
+                                <span class="mb-2 offset-8" style="font-size: 12px">Velden met een <span class="red-star">*</span> zijn verplicht indien beschikbaar.</span>
+                                <div class="row pl-4 pr-2 pb-4 pt-2">
                                                            <span *ngFor="let fuelType of data.fuelType">
                                                           <h2 class="and-h2-normal">{{fuelType.type}}</h2>
                                                             <div class="col-12">
@@ -327,6 +333,7 @@
                         </div>
                         <div class="col-3 p-0 ml-5 mt-4 " *ngIf="data.intro && data.intro.content">
                             <app-content-panel [title]="data.intro.title">
+
                             <span *ngFor="let item of data.intro.content">
                                 <h6><b>{{item.title}}</b></h6>
                                 <span *ngIf="item.type === 'para'">
@@ -398,6 +405,7 @@
 
                     </div>
                     <div class="row ml-1">
+
                         <div class="col-4 p-0">
                             <app-content-panel title="5. Vliegen - DEFRA" [fullTitleBar]="true">
                             <span *ngFor="let data of vliegen_defra.fuelType;">
@@ -433,6 +441,7 @@
                         </div>
                         <div class="col-4 p-0 ml-4">
                             <app-content-panel title="5. Vliegen" [fullTitleBar]="true">
+
                             <span *ngFor="let data of vliegen.fuelType;">
                                <h2 class="and-h2-normal">{{data.type}}</h2>
                             <div class="inline-fields">

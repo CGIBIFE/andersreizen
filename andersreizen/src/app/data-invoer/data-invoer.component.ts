@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {consoleTestResultHandler} from "tslint/lib/test";
 import {SaveCompanyConsumptionService} from "../service/save-company-consumption.service";
@@ -12,7 +12,10 @@ const units = ['kg CO2eq/ltr', 'kg CO2eq/km', 'kg CO2eq/KWH']
     styleUrls: ['./data-invoer.component.scss']
 })
 export class DataInvoerComponent implements OnInit {
-
+    @HostListener('window:beforeunload', ['$event'])
+    doSomething($event) {
+        alert('test')
+    }
     zakelijk_reizen: any [];
     woon_werkverkeer: any [];
     declaraties: any[];
