@@ -1,10 +1,12 @@
-<div class="data-invoer-container">
+<div class="data-invoer-container ">
     <div class="row">
-        <img src="assets/Icon%20awesome-charging-station.svg" class="icon"/>
         <h1 class="and-h1-normal">Mobiliteitfootprint</h1>
     </div>
     <div class="row">
-
+        <div [ngClass]="alertType === 'FAIL' ? 'alert alert-danger ': 'alert alert-success '" role="alert"
+             *ngIf="showAlter" style="position: fixed; top: 30px;z-index: 99999;left: 30%;width: 40%">
+            <p style="margin-bottom: 0px">{{alertMessage}}</p>
+        </div>
         <app-tab-panel>
 
             <div class="tab-content" data-tab="0">
@@ -31,14 +33,12 @@
                                                                 <div class="inline-fields">
                                                                    <app-input-field type="number" label="Aantal:"
                                                                                     placeholder="5747"
-                                                                                    [required]="true"
                                                                                     [fieldName]="fuelType.field+'aantal'"
                                                                                     [fGroup]="wagenparkTypeForm"
                                                                                     (change)="updateField($event,fuelType.field,'Aantal','zakelijk_reizen', data.wagenparkType)"
                                                                                     [value]="fuelType.Aantal"></app-input-field>
                                                                     <app-input-field type="text" label="Aandeel:"
                                                                                      placeholder="5747"
-                                                                                     [required]="true"
                                                                                      [fieldName]="fuelType.field+'aandeel'"
                                                                                      [disabled]="true"
                                                                                      [fGroup]="wagenparkTypeForm"
@@ -55,10 +55,10 @@
                                                                                     placeholder="56766.78"
                                                                                     [value]="fuelType.Consumptie"
                                                                                     (change)="updateField($event,fuelType.field,'Consumptie','zakelijk_reizen', data.wagenparkType,fuelType.Factor)"
-
+                                                                                    [required]="true"
                                                                                     [fieldName]="fuelType.field+'Consumptie'"
                                                                                     [fGroup]="wagenparkTypeForm"
-                                                                                    unit="LTR"></app-input-field>
+                                                                                    [unit]="fuelType.cunit"></app-input-field>
                                                                   <app-input-field type="text" label="Factor:"
                                                                                    (change)="updateField($event,fuelType.field,'Factor','zakelijk_reizen', data.wagenparkType)"
                                                                                    placeholder="2.74 kg CO2eq/ltr"
@@ -90,40 +90,22 @@
                             <div style="display: flex; flex: 1 1 100%; flex-direction: column">
                                 <app-content-panel title="Informatie over wagenpark" *ngIf="i == 0">
                                     <p>
-                                    <h6>Definitie:</h6>
-                                    <p>Werkelijke reiskilometers van de woonplaats naar een vaste werkplaats en terug
-                                        van
-                                        alle
-                                        medewerkers exclusief de medewerkers met een auto uit het wagenpark.</p>
-                                    <h6>Berekening:</h6>
-                                    <p>De kilometers woon-werkverkeer van onze medewerkers (exclusief d.m.v. het
-                                        wagenpark)
-                                        verdeeld naar onze modal split (gemiddelde wijze waarop onze medewerkers van en
-                                        naar
-                                        hun
-                                        werk komen of thuiswerken), hetgeen bepaald is middels een representatieve
-                                        enquête
-                                        onder
-                                        medewerkers. Het aantal kilometers woon-werkverkeer is berekend aan de hand van
-                                        de
-                                        afstand tussen woonplaats en standplaats en het aantal werkdagen per week. Door
-                                        deze
-                                        afstand te vermenigvuldigen maal 2 ontstaat de retourafstand per week.
-                                        Vervolgens
-                                        wordt
-                                        deze retourafstand vermenigvuldigd met het gemiddeld aantal werkdagen van een
-                                        FTE.
-                                        (max
-                                        werkdagen per jaar: 260 minus gemiddeld verlofdagen: 38 minus aantal feestdagen:
-                                        7
-                                        resulteert in het gemiddeld aantal werkdagen per FTE: 215 per jaar) </p>
-                                    <h6>Benodigdheden:</h6>
+                                    <h6><b>Definitie:</b></h6>
+                                    <p>Wagenpark van eigen beheer en lease van zowel Geel en Grijs kenteken (alleen
+                                        personenvervoer) opsplitst (kleiner of gelijk dan 3,5T). Er is een onderscheid
+                                        gemaakt tussen geel en grijs kenteken. Voor hybride benzine/diesel vermeld
+                                        fossiele brandstof zowel bij aantallen als consumptie. De fossiele brandstof mag
+                                        bij de consumptie apart opgeteld worden, en de elektriciteit (kWh) van de
+                                        hybride mag alleen bij de consumptie opgeteld worden NIET bij de aantallen van
+                                        Elektrisch.</p>
+                                    <h6><b>Berekening:</b></h6>
+                                    <p>Eenheden brandtof per soort maal de betreffende emissiefactor. </p>
+                                    <h6><b>Benodigdheden:</b></h6>
                                     <span>
                             <ol>
-                                <li>afstand woonplaats naar vaste werkplaats per medewerkers</li>
-                                <li>aantal contractdagen of FTE per medewerker</li>
-                                <li> mobiliteitsenquete</li>
-                                <li> Indien enquete niet mogelijk, gebruik CBS cijfers (zie: tab_5)</li>
+                                 <li>eenheden brandstof opvragen per soort (eventueel via
+                                     leasemaatschappij)</li>
+                                <li> km per jaar over wagenpark per brandstofsoort</li>
                             </ol>
                             </span>
                                 </app-content-panel>
@@ -167,14 +149,13 @@
                                                             <div class="col-12">
                                                                 <div class="inline-fields">
                                                                    <app-input-field type="number" label="Aantal:"
-                                                                                    placeholder="5747"
+                                                                                    placeholder="Optioneel"
                                                                                     [fieldName]="fuelType.field+'aantal'"
                                                                                     [fGroup]="woon_werkverkeer_Form"
                                                                                     (change)="updateField($event,fuelType.field,'Aantal','woon_werkverkeer', data.wagenparkType)"
                                                                                     [value]="fuelType.Aantal"></app-input-field>
                                                                     <app-input-field type="text" label="Aandeel:"
                                                                                      placeholder="5747"
-                                                                                     [required]="true"
                                                                                      [disabled]="true"
                                                                                      [fieldName]="fuelType.field+'aandeel'"
                                                                                      (change)="updateField($event,fuelType.field,'Aandeel','woon_werkverkeer', data.wagenparkType)"
@@ -186,6 +167,7 @@
                                                                                     [fGroup]="woon_werkverkeer_Form"
                                                                                     (change)="updateField($event,fuelType.field,'Kilometrage','woon_werkverkeer', data.wagenparkType,fuelType.Factor)"
                                                                                     placeholder="7667786.78"
+                                                                                    [required]="true"
                                                                                     unit="KM"></app-input-field>
                                                                    <app-input-field type="number" label="Consumptie:"
                                                                                     placeholder="56766.78"
@@ -193,7 +175,7 @@
                                                                                     [fieldName]="fuelType.field+'Consumptie'"
                                                                                     [fGroup]="woon_werkverkeer_Form"
                                                                                     (change)="updateField($event,fuelType.field,'Consumptie','woon_werkverkeer', data.wagenparkType, fuelType.Factor)"
-                                                                                    unit="LTR"></app-input-field>
+                                                                                    [unit]="fuelType.cunit"></app-input-field>
                                                                   <app-input-field type="text" label="Factor:"
                                                                                    placeholder="2.74 kg CO2eq/ltr"
                                                                                    [fieldName]="fuelType.field+'Factor'"
@@ -223,40 +205,29 @@
                             <div style="display: flex; flex: 1 1 100%; flex-direction: column">
                                 <app-content-panel title="Informatie over woon-werkverkeer" *ngIf="i == 0">
                                     <p>
-                                    <h6>Definitie:</h6>
-                                    <p>Werkelijke reiskilometers van de woonplaats naar een vaste werkplaats en terug
-                                        van
-                                        alle
-                                        medewerkers exclusief de medewerkers met een auto uit het wagenpark.</p>
-                                    <h6>Berekening:</h6>
-                                    <p>De kilometers woon-werkverkeer van onze medewerkers (exclusief d.m.v. het
-                                        wagenpark)
-                                        verdeeld naar onze modal split (gemiddelde wijze waarop onze medewerkers van en
-                                        naar
-                                        hun
-                                        werk komen of thuiswerken), hetgeen bepaald is middels een representatieve
-                                        enquête
-                                        onder
-                                        medewerkers. Het aantal kilometers woon-werkverkeer is berekend aan de hand van
-                                        de
-                                        afstand tussen woonplaats en standplaats en het aantal werkdagen per week. Door
-                                        deze
-                                        afstand te vermenigvuldigen maal 2 ontstaat de retourafstand per week.
-                                        Vervolgens
-                                        wordt
+                                    <h6><b>Definitie:</b></h6>
+                                    <p> Werkelijke reiskilometers van de woonplaats naar een vaste werkplaats en terug
+                                        van alle medewerkers exclusief de medewerkers met een auto uit het
+                                        wagenpark.</p>
+                                    <h6><b>Berekening:</b></h6>
+                                    <p> De kilometers woon-werkverkeer van onze medewerkers (exclusief d.m.v. het
+                                        wagenpark) verdeeld naar onze modal split (gemiddelde wijze waarop onze
+                                        medewerkers van en naar hun werk komen of thuiswerken), hetgeen bepaald is
+                                        middels een representatieve enquête onder medewerkers. Het aantal kilometers
+                                        woon-werkverkeer is berekend aan de hand van de afstand tussen woonplaats en
+                                        standplaats en het aantal werkdagen per week. Door deze afstand te
+                                        vermenigvuldigen maal 2 ontstaat de retourafstand per week. Vervolgens wordt
                                         deze retourafstand vermenigvuldigd met het gemiddeld aantal werkdagen van een
-                                        FTE.
-                                        (max
-                                        werkdagen per jaar: 260 minus gemiddeld verlofdagen: 38 minus aantal feestdagen:
-                                        7
-                                        resulteert in het gemiddeld aantal werkdagen per FTE: 215 per jaar) </p>
-                                    <h6>Benodigdheden:</h6>
+                                        FTE. (max werkdagen per jaar: 260 minus gemiddeld verlofdagen: 38 minus aantal
+                                        feestdagen: 7 resulteert in het gemiddeld aantal werkdagen per FTE: 215 per
+                                        jaar) </p>
+                                    <h6><b>Benodigdheden:</b></h6>
                                     <span>
                             <ol>
-                                <li>afstand woonplaats naar vaste werkplaats per medewerkers</li>
+                                <li> afstand woonplaats naar vaste werkplaats per medewerkers</li>
                                 <li>aantal contractdagen of FTE per medewerker</li>
-                                <li> mobiliteitsenquete</li>
-                                <li> Indien enquete niet mogelijk, gebruik CBS cijfers (zie: tab_5)</li>
+                                <li> mobiliteitsenquete </li>
+                                <li>Indien enquete niet mogelijk, gebruik CBS cijfers (zie: tab_4)</li>
                             </ol>
                             </span>
                                 </app-content-panel>
@@ -307,7 +278,6 @@
                                                                                     [value]="fuelType.Aantal"></app-input-field>
                                                                     <app-input-field type="text" label="Aandeel:"
                                                                                      placeholder="5747"
-                                                                                     [required]="true"
                                                                                      (change)="updateField($event,fuelType.field,'Aandeel','declaraties', data.wagenparkType)"
                                                                                      [disabled]="true"
                                                                                      [fieldName]="fuelType.field+'aandeel'"
@@ -318,6 +288,7 @@
                                                                                     (change)="updateField($event,fuelType.field,'Kilometrage','declaraties', data.wagenparkType, fuelType.Factor)"
                                                                                     [fieldName]="fuelType.field+'Kilometrage'"
                                                                                     [fGroup]="declaratiesForm"
+                                                                                    [required]="true"
                                                                                     placeholder="7667786.78"
                                                                                     unit="KM"></app-input-field>
                                                                    <app-input-field type="number" label="Consumptie:"
@@ -326,7 +297,7 @@
                                                                                     [fGroup]="declaratiesForm"
                                                                                     (change)="updateField($event,fuelType.field,'Consumptie','declaraties', data.wagenparkType)"
                                                                                     placeholder="56766.78"
-                                                                                    unit="LTR"></app-input-field>
+                                                                                    [unit]="fuelType.cunit"></app-input-field>
                                                                   <app-input-field type="text" label="Factor:"
                                                                                    placeholder="2.74 kg CO2eq/ltr"
                                                                                    [value]="fuelType.Factor"
@@ -352,42 +323,43 @@
                                 </div>
                             </app-content-panel>
 
+
+                        </div>
+                        <div class="col-3 p-0 ml-5 mt-4 " *ngIf="data.intro && data.intro.content">
+                            <app-content-panel [title]="data.intro.title">
+                            <span *ngFor="let item of data.intro.content">
+                                <h6><b>{{item.title}}</b></h6>
+                                <span *ngIf="item.type === 'para'">
+                                    <p *ngFor="let para of item.text">
+                                         {{para}}
+                                    </p>
+                                </span>
+                                  <span *ngIf="item.type === 'list'">
+                                      <ol>
+                                      <li *ngFor="let para of item.text">
+                                         {{para}}
+                                    </li>
+                                          </ol>
+                                  </span>
+                            </span>
+                            </app-content-panel>
                         </div>
                         <div class="col-3 p-0 ml-5 mt-4 ">
                             <div style="display: flex; flex: 1 1 100%; flex-direction: column">
                                 <app-content-panel title="Informatie over declaraties (auto) kilometers" *ngIf="i == 0">
-                                    <p>
-
-                                    <h6>Definitie:</h6>
+                                    <h6><b>Definitie:</b></h6>
                                     <p>Variabele vergoedingen van de werkgever voor een privevervoermiddel voor zakelijk
-                                        verkeer (excl. woon-werkverkeer vaste vergoeding).</p>
-                                    <h6>Berekening:</h6>
-                                    <p>De kilometers woon-werkverkeer van onze medewerkers (exclusief d.m.v. het
-                                        wagenpark)
-                                        verdeeld naar onze modal split (gemiddelde wijze waarop onze medewerkers van en
-                                        naar
-                                        hun
-                                        werk komen of thuiswerken), hetgeen bepaald is middels een representatieve
-                                        enquête
-                                        onder
-                                        medewerkers. Het aantal kilometers woon-werkverkeer is berekend aan de hand van
-                                        de
-                                        afstand tussen woonplaats en standplaats en het aantal werkdagen per week. Door
-                                        deze
-                                        afstand te vermenigvuldigen maal 2 ontstaat de retourafstand per week.
-                                        Vervolgens
-                                        wordt
-                                        deze retourafstand vermenigvuldigd met het gemiddeld aantal werkdagen van een
-                                        FTE.
-                                        (max
-                                        werkdagen per jaar: 260 minus gemiddeld verlofdagen: 38 minus aantal feestdagen:
-                                        7
-                                        resulteert in het gemiddeld aantal werkdagen per FTE: 215 per jaar) </p>
-                                    <h6>Benodigdheden:</h6>
+                                        verkeer (excl. woon-werkverkeer vaste vergoeding) </p>
+                                    <h6><b>Berekening:</b></h6>
+                                    <p>De hoeveelheden voor het zakelijke verkeer worden berekend o.b.v. de
+                                        gedeclareerde kosten en de vergoeding per gedeclareerde kilometer (0,XX €/km).
+                                        De verdeling naar brandstof vindt plaats o.b.v. de brandstofverdeling vanuit CBS
+                                        / de mobiliteitsenquête / andere vorm. (brandstof onbekend als data niet
+                                        beschikbaar) </p>
+                                    <h6><b>Benodigdheden:</b></h6>
                                     <ol>
-                                        <li> Het aantal vergoede kilometers of werkelijke vergoedingen voor zakelijk
-                                            verkeer
-                                            (excl woon--werkverkeer).
+                                        <li>Het aantal vergoede kilometers of werkelijke vergoedingen voor
+                                            zakelijk verkeer (excl woon--werkverkeer).
                                         </li>
                                     </ol>
                                     <span>
@@ -411,26 +383,21 @@
                     </div>
                     <div class="row ml-0">
                         <div class="col-8 p-0">
-                            <app-content-panel title="Informatie over declaraties OV-reizen">
+                            <app-content-panel title="Informatie over vliegen">
                                 <p>
-                                    <b>Definitie:</b> kilometrage van de zakelijke vluchten. Sommige bedrijven werken
-                                    met
-                                    Nederlandse cijfers van de C02 emissiefactoren en sommige hanteren de internationale
-                                    DEFRA eenheden. Kies de maatstaaf die logisch is voor jouw organisatie.
+                                    <b>Definitie:</b> kilometrage van de zakelijke vluchten. Sommige bedrijven werken met Nederlandse cijfers van de C02 emissiefactoren en sommige hanteren de internationale DEFRA eenheden. Kies de maatstaaf die logisch is voor jouw organisatie.
                                 </p>
                                 <p>
-                                    <b>Berekening:</b> aantal kilometers per categorie maai de betreffende
-                                    emissiefactor.
-                                    Mocht je C02 Emissiefactoren hanteren, deze heeft geen businessclass, we houden
-                                    momenteel voor Business vluchten een Factor: 3x aan.
+                                    <b>Berekening:</b> aantal kilometers per categorie maai de betreffende emissiefactor. Mocht je C02 Emissiefactoren hanteren, deze heeft geen businessclass, we houden momenteel voor Business vluchten een Factor: 3x aan.
                                 </p>
                                 <p>
-                                    <b>Benodigdheden:</b> 1. kilometers per categorie zakelijke vluchten.
+                                    <b>Benodigdheden:</b> kilometers per categorie zakelijke vluchten.
                                 </p>
                             </app-content-panel>
                         </div>
+
                     </div>
-                    <div class="row">
+                    <div class="row ml-1">
                         <div class="col-4 p-0">
                             <app-content-panel title="5. Vliegen - DEFRA" [fullTitleBar]="true">
                             <span *ngFor="let data of vliegen_defra.fuelType;">
@@ -438,6 +405,7 @@
                             <div class="inline-fields">
                                 <app-input-field type="number" label="Kilometrage:"
                                                  placeholder=""
+                                                 [disabled]="vliegen_defra_disable"
                                                  [fieldName]="data.field+'Kilometrage'"
                                                  [fGroup]="declaratiesForm"
                                                  (change)="updateField($event,data.field,'Kilometrage','DEFRA', data.type, data.Factor)"
@@ -458,7 +426,7 @@
                             </span>
                                 <div class="col-10 offset-1">
                                     <app-button type="opec" text="Vliegen (DEFRA) opslaan"
-                                                (click)="submitData(vliegen_defra)"></app-button>
+                                                (click)="submitData(vliegen_defra)" [disabled]="vliegen_defra_disable"></app-button>
                                 </div>
                             </app-content-panel>
 
@@ -470,6 +438,7 @@
                             <div class="inline-fields">
                                 <app-input-field type="number" label="Kilometrage:"
                                                  placeholder=""
+                                                 [disabled]="vliegen_disable"
                                                  [fieldName]="data.field+'Kilometrage'"
                                                  (change)="updateField($event,data.field,'Kilometrage','Vliegen', data.type, data.Factor)"
                                                  [fGroup]="declaratiesForm"
@@ -491,7 +460,7 @@
                             </span>
                                 <div class="col-10 offset-1">
                                     <app-button type="opec" text="Vliegen opslaan"
-                                                (click)="submitData(vliegen)"></app-button>
+                                                (click)="submitData(vliegen)" [disabled]="vliegen_disable"></app-button>
                                 </div>
 
                             </app-content-panel>

@@ -24,6 +24,8 @@ import {HttpMockRequestInterceptor} from "../Interceptor/HttpMockRequestIntercep
 import {environment} from "../environments/environment";
 import {HttpRequestInterceptor} from "../Interceptor/HttpRequestInterceptor";
 import {AuthService} from "./service/auth.service";
+import { GuidelinesComponent } from './guidelines/guidelines.component';
+import { CbsNumbersComponent } from './cbs-numbers/cbs-numbers.component';
 export const isMock = environment.mock;
 
 @NgModule({
@@ -43,7 +45,9 @@ export const isMock = environment.mock;
     DataInvoerComponent,
     TabPanelComponent,
     PanelComponent,
-    LineComponent
+    LineComponent,
+    GuidelinesComponent,
+    CbsNumbersComponent
   ],
   imports: [
     BrowserModule,

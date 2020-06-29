@@ -4,11 +4,23 @@
     </div>
     <div class="row">
         <app-content-panel title="Scope">
+            <p>Welkom bij de online omgeving voor de mobiliteit footprint van Anders Reizen. Deze tool kan je gebruiken
+                om de C02 footprint per medewerker te berekenen. Het kan voorkomen dat sommige data niet beschikbaar is
+                of dat binnen jullie bedrijf geen gebruik maakt van sommige categorieen (Bijv. Bio-CNG). Het
+                uitgangspunt is: probeer zoveel mogelijk data in te vullen. Beginnend bij het basisjaar 2016, indien
+                niet beschikbaar. Start dan bij het eerst volgende beschikbare jaar. Vul graag voor elk jaar de
+                mobiliteit footprint in. Alle data wordt opgeslagen op jullie bedrijfsaccount. Per bedrijf kan er maar
+                één account aangemaakt worden. Deze data kan alleen door jullie eigen account bekeken worden en door de
+                leden van het programma team van Anders Reizen. Verder wordt deze data niet gedeeld. De data wordt
+                opgeslagen op een beveiligde server. Deze data wordt gebruikt om een rapportage te maken om jullie
+                inzicht te geven in jullie C02 uitstoot. Wanneer er meer data ingevuld wordt, hoe beter de uiteindelijke
+                rapportage wordt. </p>
             <p>De scope is personenvervoer voor woon-werkverkeer en zakelijk verkeer voor de Nederlandse activiteiten
                 van een bedrijf. Onder personenvervoer vallen alle modaliteiten, zoals het openbaar vervoer, fiets,
                 vliegtuig, auto, et cetera. Voor personenvervoer met de auto geldt dat zowel geel als grijs kentekens
                 auto’s in scope zijn, waarbij voor grijze kentekens een maximum geldt van 3500 kg en uit scope is
-                wanneer het voertuig ingezet wordt voor goederentransport.</p>
+                wanneer het voertuig ingezet wordt voor goederentransport. </p>
+            <p>Vragen? Neem dan contact op via <a href="mailto:nigel.vanderweerd@andersreizen.nu">nigel.vanderweerd@andersreizen.nu</a></p>
         </app-content-panel>
     </div>
     <div class="row ">
@@ -32,21 +44,22 @@
         </div>
         <div class="col-9">
             <app-content-panel title="Uw bedrijfsgegevens">
-                <div [ngClass]="alertType === 'FAIL' ? 'alert alert-danger': 'alert alert-success'" role="alert" *ngIf="showAlter">
+                <div [ngClass]="alertType === 'FAIL' ? 'alert alert-danger': 'alert alert-success'" role="alert"
+                     *ngIf="showAlter">
                     <p>{{alertMessage}}</p>
-                    <p *ngIf="alertType === 'SUCCESS'">You data is saved!</p>
                 </div>
-                    <form [formGroup]="profileForm" (ngSubmit)="saveCompanyDetails()">
-                        <div class="row">
+                <form [formGroup]="profileForm" (ngSubmit)="saveCompanyDetails()">
+                    <div class="row">
                         <div class="col-6">
 
                             <div class="inline-fields">
                                 <app-input-field type="text" label="E-mail:" [value]="profileField.email"
                                                  (change)="updatefields($event,'email')"
                                                  placeholder="Johndoe@cgi.com" [fGroup]="profileForm" [required]="true"
-                                                 fieldName="email" ></app-input-field>
+                                                 fieldName="email"></app-input-field>
                                 <app-input-field type="text" label="Telefoon:" placeholder="0612345678"
-                                                 [value]="profileField.telephone" [fGroup]="profileForm" [required]="true"
+                                                 [value]="profileField.telephone" [fGroup]="profileForm"
+                                                 [required]="true"
                                                  fieldName="telefone"
                                                  (change)="updatefields($event,'telephone')"></app-input-field>
                             </div>
@@ -57,19 +70,22 @@
                                              fieldName="naam_bedrijf"
                                              (change)="updatefields($event,'companyName')"
                                              placeholder="CGI"></app-input-field>
-                            <app-input-field type="text" label="Branch/type organisatie:" [value]="profileField.companyType"
+                            <app-input-field type="text" label="Branch/type organisatie:"
+                                             [value]="profileField.companyType"
                                              (change)="updatefields($event,'companyType')"
                                              [fGroup]="profileForm" [required]="true"
                                              fieldName="branch"
                                              placeholder="IT Consultancy"></app-input-field>
-                            <app-input-field type="text" label="Gemiddeld FTE per jaar:" [value]="profileField.averageFte"
+                            <app-input-field type="text" label="Gemiddeld FTE per jaar:"
+                                             [value]="profileField.averageFte"
                                              (change)="updatefields($event,'averageFte')"
-                                             [fGroup]="profileForm" [required]="true"
+                                             [fGroup]="profileForm"
                                              fieldName="fte"
                                              placeholder="1587689"></app-input-field>
                             <app-input-field type="text" label="Gemiddeld aantal auto's per jaar:"
-                                             [value]="profileField.carsAverage" (change)="updatefields($event,'carsAverage')"
-                                             [fGroup]="profileForm" [required]="true"
+                                             [value]="profileField.carsAverage"
+                                             (change)="updatefields($event,'carsAverage')"
+                                             [fGroup]="profileForm"
                                              fieldName="aantal"
                                              placeholder="1587689"></app-input-field>
                             <app-input-field type="text" label="Ingevuld door:" placeholder="John Doe"
@@ -86,19 +102,19 @@
                                              (change)="updatefields($event,'date')"></app-input-field>
                             <app-input-field type="text" label="Vestigingen:" [value]="profileField.location"
                                              (change)="updatefields($event,'location')"
-                                             [fGroup]="profileForm" [required]="true"
+                                             [fGroup]="profileForm"
                                              fieldName="vestigingen"
                                              placeholder="Amsterdam, Rotterdam"></app-input-field>
                             <app-input-field type="number" label="Reiskosten vergoeding woonwerk:"
                                              [value]="profileField.travelAllowance"
-                                             [fGroup]="profileForm" [required]="true"
+                                             [fGroup]="profileForm"
                                              fieldName="resikosten_vergoeding"
                                              (change)="updatefields($event,'travelAllowance')"
                                              placeholder="856"></app-input-field>
                             <app-input-field type="number" label="Reiskosten vergoeding zakelijk verkeer:"
                                              [value]="profileField.businessTrafficAllowance"
                                              (change)="updatefields($event,'businessTrafficAllowance')"
-                                             [fGroup]="profileForm" [required]="true"
+                                             [fGroup]="profileForm"
                                              fieldName="resikosten_vergoeding_zakelijk"
                                              placeholder="984"></app-input-field>
                             <app-textarea label="Voor het Leasewagenpark:"
@@ -107,16 +123,17 @@
                                           [fGroup]="profileForm"
                                           (change)="updatefields($event,'description')"></app-textarea>
                         </div>
-                        </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-6">
-                            </div>
-                            <div class="col-6">
-                                <app-button type="opec" text="Opslaan" [disabled]="profileForm.invalid"></app-button>
-                            </div>
+                    <div class="row">
+                        <div class="col-6">
                         </div>
-                    </form>
+                        <div class="col-6">
+                            <app-button type="opec" text="Opslaan" *ngIf="!this.profileStatus"></app-button>
+                            <app-button type="opec" text="Bijwerken" *ngIf="this.profileStatus"></app-button>
+                        </div>
+                    </div>
+                </form>
 
             </app-content-panel>
         </div>

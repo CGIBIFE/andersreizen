@@ -1,8 +1,11 @@
 <div>
+    <div [ngClass]="alertType === 'FAIL' ? 'alert alert-danger': 'alert alert-success'" role="alert" *ngIf="showAlter" style="max-width: 450px">
+        <p style="margin-bottom: 0px">{{alertMessage}}</p>
+    </div>
     <form (ngSubmit)="login()" [formGroup]="LoginForm" novalidate="false" >
         <app-input-field label="Email" placeholder="sample@some.com" type="email" [value]="loginfields.username"
                          (change)="updateUserCred($event,'username')"  fieldName="username" [fGroup]="LoginForm" [required]="true"></app-input-field>
-        <app-input-field label="Password" placeholder="*******" type="password" [value]="loginfields.password" [required]="true" [minLength]="6"
+        <app-input-field label="Password" placeholder="*******" type="password" [value]="loginfields.password" [required]="true" [minLength]="8"
                          (change)="updateUserCred($event,'password')" fieldName="password" [fGroup]="LoginForm"></app-input-field>
         <div class="mt-3">
             <app-button type="opec" text="Inloggen" ></app-button>

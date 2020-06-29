@@ -3,7 +3,7 @@
 <div class="parent">
     <span class="heading">INTRO</span>
     <li (click)="goto('user/intro');selectedmenu='intro'" [ngClass]="selectedmenu === 'intro' && 'selected'"><span class="icon"><img [attr.src]="selectedmenu ==='intro' ? 'assets/Icon ionic-md-paper-white.svg':'assets/Icon ionic-md-paper.svg'"></span><span class="menu-item">Introductie</span></li>
-    <li><span class="icon"><img src="assets/Icon%20awesome-grip-lines.svg"></span><span class="menu-item">Richtlijnen</span></li>
+    <li  (click)="goto('user/richtlijnen');selectedmenu='guideline'" [ngClass]="selectedmenu === 'guideline' && 'selected'"><span class="icon"><img [attr.src]="selectedmenu === 'guideline' ? 'assets/Icon%20awesome-grip-lines-invert.svg' : 'assets/Icon%20awesome-grip-lines.svg'"></span><span class="menu-item">Richtlijnen</span></li>
 </div>
 <div class="parent">
     <span class="heading">DATA INVOER</span>
@@ -11,7 +11,10 @@
 </div>
     <div class="parent">
         <span class="heading">OVERIGE</span>
-        <li><span class="icon"><img src="assets/Icon%20ionic-md-analytics.svg"></span><span class="menu-item">CBS Cijfers</span></li>
+        <li (click)="goto('user/cbs-cijfers');selectedmenu='cbs'" [ngClass]="selectedmenu === 'cbs' && 'selected'"><span class="icon"><img [attr.src]="selectedmenu === 'cbs' ? 'assets/Icon ionic-md-analytics-inverse.svg' : 'assets/Icon ionic-md-analytics.svg'"></span><span class="menu-item">CBS Cijfers</span></li>
     </div>
     </div>
+    <span class="footer-link-container">
+    <a href="https://co2emissiefactoren.nl">co2emissiefactoren.nl <img src="assets/Icon%20feather-external-link.svg" /> </a>
+        </span>
 </div>

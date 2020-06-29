@@ -12,8 +12,12 @@ input {
 input:disabled {
   background: #ECEEEF;
 }
-input.ng-invalid.ng-dirty {
+input[required].ng-pristine.ng-invalid.ng-touched, input[required].ng-invalid.ng-touched.ng-dirty{
   border: thin solid #CB2E25;
+}
+.red-star{
+  color: #CB2E25;
+  font-size: 16px;
 }
 .unit-input {
   width: 75%;
@@ -27,7 +31,7 @@ input.ng-invalid.ng-dirty {
 
 label {
   color: #373A3C;
-  font-size: 14px;
+  font-size: 12px;
   font-family: lato-regular;
   margin-bottom: 3px;
 
@@ -41,8 +45,9 @@ label {
   display: flex;
   border-radius: 4px;
   font-size: 12px;
+  display: block;
+  text-align: center;
   padding-top: 12px;
-  padding-left: 10px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   color: #55595C;

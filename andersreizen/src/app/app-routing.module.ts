@@ -8,6 +8,8 @@ import {DashboardComponent} from "./dashboard/dashboard.component";
 import {IntroComponent} from "./intro/intro.component";
 import {DataInvoerComponent} from "./data-invoer/data-invoer.component";
 import {AuthGuardService} from "./service/auth-guard.service";
+import {GuidelinesComponent} from "./guidelines/guidelines.component";
+import {CbsNumbersComponent} from "./cbs-numbers/cbs-numbers.component";
 
 
 const routes: Routes = [
@@ -19,6 +21,8 @@ const routes: Routes = [
     {path:'user', component: DashboardComponent, children:[
             {path: '', component: IntroComponent},
             {path: 'intro', component: IntroComponent},
+            {path: 'richtlijnen', component: GuidelinesComponent},
+            {path: 'cbs-cijfers', component: CbsNumbersComponent},
             {path: 'data-invoer', component: DataInvoerComponent}
         ],canActivate:[AuthGuardService] }
     ];

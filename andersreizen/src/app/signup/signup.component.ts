@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {SignupService} from "../service/signup.service";
 import {timeout} from "rxjs/operators";
-import {FormGroup} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'app-signup',
@@ -36,13 +36,13 @@ export class SignupComponent implements OnInit {
     }
 
     signup() {
-        if (this.SignupForm.status === 'VALID') {
+            if (this.SignupForm.valid) {
             if(this.singupForm.password === this.singupForm.repeat_password){
                 this.signupService.signup(this.singupForm).subscribe(data => {
                     if (data.status === 'SUCCESS') {
                         this.showAlter = true;
                         this.alertType ='SUCCESS'
-                        this.alertMessage = data.comment;
+                        this.alertMessage = 'Succesvol geregistreerd. U wordt direct doorgestuurd naar de loginpagina.';
                         setTimeout(() => {
                             this.goto('login')
                         }, 3000)
@@ -54,14 +54,28 @@ export class SignupComponent implements OnInit {
                         }
                     }
                 })
+            }else {
+                this.showAlter = true;
+                this.alertType ='FAIL'
+                this.alertMessage = '  Wachtwoorden komen niet overeen.'
             }
 
         }else {
-            console.log('invalid form')
+                this.validateAllFormFields(this.SignupForm);
         }
     }
 
     updatefields(e, field) {
         this.singupForm[field] = e.target.value;
+    }
+    private validateAllFormFields(profileForm: FormGroup) {
+        Object.keys(profileForm.controls).forEach(field => {
+            const control = profileForm.get(field);
+            if (control instanceof FormControl) {
+                control.markAsTouched({ onlySelf: true });
+            } else if (control instanceof FormGroup) {
+                this.validateAllFormFields(control);
+            }
+        });
     }
 }

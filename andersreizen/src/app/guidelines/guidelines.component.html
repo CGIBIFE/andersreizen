@@ -1,0 +1,57 @@
+<div class="data-guidelines-container mt-3 ml-2">
+    <div class="row">
+        <h1 class="and-h1-normal">Richtlijnen</h1>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <app-content-panel title="Algemeen">
+                <ol>
+                    <li>Alleen data invullen als substantieel deel minstens 5% van het totaal is.</li>
+                    <li>Model onderscheid gele en grijze kentekens, 2) maximaal voertuiggewicht is 3,5 ton, i.e. B rijbewijs (boven de 3,5 ton word beschouwd als vracht).</li>
+                    <li>Plug-in hybrides: indien beschikbaar splits verder uit (rapportage gesplitst in liters en kwh).</li>
+                    <li>FTE, aantallen: Het jaargemiddelde word toegepast (begin jaar + eind jaar / 2).</li>
+                    <li>Rapportage periode is altijd 365 dagen, fiscaal of kalenderjaar kan beide gehanteerd worden</li>
+                    <li>De totalen in percentages hoeven niet 100% te zijn als je het niet substantiele deel van minder dan 5% weglaat</li>
+                    <li>De C02 emissiefactoren uitstoot gaat uit van Well-to-Wheel (WTW), omdat hierin het volledige proces van de energieflow wordt meegenomen (van opwekking tot verbruik)</li>
+                </ol>
+            </app-content-panel>
+            <app-content-panel title="2. Woon-werk verkeer (WWV)">
+                <p>Onderscheid tussen 1) daadwerkelijke kilometers en 2) vergoede kilometers (maximum 60kms enkele reis). Om de daadwerkelijke emissie in kaart te brengen zal over de daadwerkelijke kilometers gerapporteerd worden.</p>
+                <p>Onderstaande uitsplitsingsmethode toepassen als WWV minstens 50% van totale uitstoot bevat</p>
+                <p>OV: Woonwerk hebben we alleen de trajectkaarten bijgevoegd, voor nu hebben we onder zakelijk gedeclareerd alle KM en bedragen ondergebracht om geen dubbeltellingen mee te nemen.</p>
+                3 Opties voor uitsplitsingsuitvraag (% aandeel van WWV ten opzichte van totaal):
+                <ol>
+                    <li> Eigen methode/data</li>
+                    <li> Mobiliteitsenquete (1x in de 2 jaar)</li>
+                    <li>Gebruik algemene CBS cijfers (zie tablad 5)</li>
+                    <li> Default is 215 werkdagen per jaar, indien anders neem mee in de berekening en geef dit aan.</li>
+                </ol>
+            </app-content-panel>
+        </div>
+        <div class="col-6">
+            <app-content-panel title="1. Wagenpark">
+                <ol>
+                    <li>Gebruik brandstofmix (stroom onbekend) van C02emissiefactoren.nl als standaard, tenzij onderbouwing van bijv. groene stroom --> Elektrisch: gemiddelde stroommix per KM</li>
+                    <li>Mocht je het aantal kilometers niet weten, gebruik cijfers uit afgesloten contract</li>
+                    <li>Beëindiging van leasecontract staat accurate informatie in van gereden kilometers</li>
+                    <li>Voor hybride benzine/diesel vermeld fossiele brandstof zowel bij aantallen als consumptie. De fossiele brandstof mag bij de consumptie apart opgeteld worden, en de elektriciteit (kWh) van de hybride mag alleen bij de consumptie opgeteld worden NIET bij de aantallen van Elektrisch.</li>
+                    <li>Bij de subcategorie Elektrisch wordt alleen 100% elektrisch meegerekend.</li>
+                </ol>
+            </app-content-panel>
+            <app-content-panel title="3. Declaraties (auto)kilometers - variabele vergoeding">
+               <ol>
+                   <li>Als kilometrage beschikbaar is, zijn deze cijfers verplicht. Indien niet beschikbaar; ga uit van liters met prijs</li>
+                   <li>Indien brandstofsoort van de auto niet beschikbaar is, hanteer standaard CBS uitsplitsing.</li>
+                   <li>Taxiritten mogen bij diesel ondergebracht worden.</li>
+               </ol>
+            </app-content-panel>
+            <app-content-panel title="5. Vliegen">
+                <ol>
+                    <li>Voor vliegen gebruiken we de internationale DEFRA benchbark OF C02 Emissiefactoren (Kies de optie die jouw bedrijf hanteert).</li>
+                    <li>C02 Emissiefactoren heeft geen businessclass, daarom houden we onderscheid tussen Economy en Business vluchten (Factor: 3x)</li>
+                    <li>Naast directe CO2 ook impact van uitstoot C02 vliegen is rediative forcing (x190%)</li>
+                </ol>
+            </app-content-panel>
+        </div>
+    </div>
+</div>
