@@ -809,7 +809,7 @@ export class DataInvoerComponent implements OnInit {
                 Kilometrage: 0,
                 Emissie: 0
             },
-            wagenparkType: '3. Declaraties (auto)kilometers - variabele vergoeding',
+            wagenparkType: '3. (auto)kilometers - variabele vergoeding',
             submitstring: 'Declaraties (auto) kilometers opslaan',
             fuelType: [{
                 type: '1. Benzine:',
@@ -888,7 +888,7 @@ export class DataInvoerComponent implements OnInit {
                 Kilometrage: 0,
                 Consumptie: '',
                 cunit: 'ltr',
-                Factor: '0.00 kg CO2eq/km',
+                Factor: '0.18 kg CO2eq/km',
                 field: 'Taxi',
                 Emissie: 0
             }, {
@@ -934,7 +934,7 @@ export class DataInvoerComponent implements OnInit {
                     }
                 ]
             },
-            wagenparkType: '4. Declaraties OV-reizen',
+            wagenparkType: '4. OV Reizen.',
             submitstring: 'Declaraties OV-reizen opslaan',
             year: 0,
             fuelType: [{
