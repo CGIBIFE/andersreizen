@@ -388,22 +388,6 @@
                         </div>
 
                     </div>
-                    <div class="row ml-0">
-                        <div class="col-8 p-0">
-                            <app-content-panel title="Informatie over vliegen">
-                                <p>
-                                    <b>Definitie:</b> kilometrage van de zakelijke vluchten. Sommige bedrijven werken met Nederlandse cijfers van de C02 emissiefactoren en sommige hanteren de internationale DEFRA eenheden. Kies de maatstaaf die logisch is voor jouw organisatie.
-                                </p>
-                                <p>
-                                    <b>Berekening:</b> aantal kilometers per categorie maai de betreffende emissiefactor. Mocht je C02 Emissiefactoren hanteren, deze heeft geen businessclass, we houden momenteel voor Business vluchten een Factor: 3x aan.
-                                </p>
-                                <p>
-                                    <b>Benodigdheden:</b> kilometers per categorie zakelijke vluchten.
-                                </p>
-                            </app-content-panel>
-                        </div>
-
-                    </div>
                     <div class="row ml-1">
 
                         <div class="col-4 p-0">
@@ -439,7 +423,7 @@
                             </app-content-panel>
 
                         </div>
-                        <div class="col-4 p-0 ml-4">
+                        <div class="col-4 p-0 ml-3">
                             <app-content-panel title="5. Vliegen" [fullTitleBar]="true">
 
                             <span *ngFor="let data of vliegen.fuelType;">
@@ -483,6 +467,19 @@
                                         </app-content-panel>
                             </span>
                             </div>
+                        </div>
+                        <div class="col-3">
+                            <app-content-panel title="Informatie over vliegen">
+                                <p>
+                                    <b>Definitie:</b> kilometrage van de zakelijke vluchten. Sommige bedrijven werken met Nederlandse cijfers van de C02 emissiefactoren en sommige hanteren de internationale DEFRA eenheden. Kies de maatstaaf die logisch is voor jouw organisatie.
+                                </p>
+                                <p>
+                                    <b>Berekening:</b> aantal kilometers per categorie maai de betreffende emissiefactor. Mocht je C02 Emissiefactoren hanteren, deze heeft geen businessclass, we houden momenteel voor Business vluchten een Factor: 3x aan.
+                                </p>
+                                <p>
+                                    <b>Benodigdheden:</b> kilometers per categorie zakelijke vluchten.
+                                </p>
+                            </app-content-panel>
                         </div>
                     </div>
                 </form>
