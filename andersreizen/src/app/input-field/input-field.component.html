@@ -1,9 +1,13 @@
 <span [ngClass]="unit ? 'input-group' : 'input-container'" [formGroup]="fGroup">
     <div>
         <label>
-            {{label}} <span class="red-star" *ngIf="required">*</span>
+            {{label}} <span class="red-star" *ngIf="required">*</span> <span class="hover-icon" *ngIf="tooltip"
+                                                                             (mouseenter)="toggleTooltip()" [ngbTooltip]="tooltipText" placement="top" tooltipClass="tooltipContainer"></span>
+
         </label>
     </div>
-    <input [type]="type" [value]="value" [placeholder]="placeholder" [attr.disabled]="disabled ? true : null" [ngClass]="unit ? 'unit-input' : 'normal'" [formControlName]="fieldName" [required]="required" [email]="type === 'email' ? true: false " [minlength]="minLength"/>
+    <input [type]="type" [value]="value" [placeholder]="placeholder" [attr.disabled]="disabled ? true : null"
+           [ngClass]="unit ? 'unit-input' : 'normal'" [formControlName]="fieldName" [required]="required"
+           [email]="type === 'email' ? true: false " [minlength]="minLength"/>
     <span class="unit" *ngIf="unit">{{unit}}</span>
 </span>

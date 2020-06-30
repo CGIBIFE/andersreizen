@@ -9,6 +9,7 @@ export class ContentPanelComponent implements OnInit {
 
   @Input() title: string;
   @Input() fullTitleBar: string
+  @Input() hideTitleBar: boolean
   constructor() { }
 
   ngOnInit() {

@@ -18,6 +18,9 @@ export class InputFieldComponent implements OnInit {
   @Input() fieldName: string
   @Input() fGroup: FormGroup
   @Input() minLength:number
+  @Input() tooltip: boolean
+  @Input() tooltipText: string
+  @Input() bigToolTip: boolean;
   constructor() { }
 
   ngOnInit() {
@@ -27,4 +30,7 @@ export class InputFieldComponent implements OnInit {
 
   }
 
+  toggleTooltip(){
+    console.log('hover')
+  }
 }

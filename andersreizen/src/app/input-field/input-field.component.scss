@@ -9,22 +9,27 @@ input {
   height: 45px;
   margin-bottom: 10px;
 }
+
 input:disabled {
   background: #ECEEEF;
 }
-input[required].ng-pristine.ng-invalid.ng-touched, input[required].ng-invalid.ng-touched.ng-dirty{
+
+input[required].ng-pristine.ng-invalid.ng-touched, input[required].ng-invalid.ng-touched.ng-dirty {
   border: thin solid #CB2E25;
 }
-.red-star{
+
+.red-star {
   color: #CB2E25;
-  font-size: 16px;
+  font-size: 13px;
 }
+
 .unit-input {
   width: 75%;
   border-right: 0px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+
 .normal {
   width: 100%;
 }
@@ -34,7 +39,7 @@ label {
   font-size: 12px;
   font-family: lato-regular;
   margin-bottom: 3px;
-
+  display: flex;
 }
 
 .unit {
@@ -53,4 +58,28 @@ label {
   color: #55595C;
 }
 
+.hover-icon {
+  display: inline-block;
+  width: 15px;
+  height: 20px;
+  background: url("../../assets/Icon awesome-question-circle.svg");
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  margin-left: 5px;
+  background-position: left;
+}
 
+
+::ng-deep .tooltip-inner {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #C5C5C5;
+  border-radius: 4px;
+  color: #373A3C;
+  width: fit-content;
+  min-width: 300px;
+}
+
+::ng-deep .arrow::before {
+  border-bottom-color: #C5C5C5 !important;
+  border-top-color: #C5C5C5 !important;
+}

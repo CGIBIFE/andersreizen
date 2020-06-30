@@ -1,4 +1,4 @@
-<div [ngClass]="fullTitleBar ? 'full-title-bar': 'title-block'">
+<div [ngClass]="fullTitleBar ? 'full-title-bar': 'title-block'" *ngIf="!hideTitleBar">
     {{title}}
 </div>
 <div class="content-block">

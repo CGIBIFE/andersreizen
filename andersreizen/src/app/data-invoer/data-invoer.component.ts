@@ -64,10 +64,15 @@ export class DataInvoerComponent implements OnInit {
 
     updateField(event, field, type, tab, fleetType, factor?) {
         switch (tab) {
+
             case 'zakelijk_reizen': {
 
+                let value = event.target.value
+                if (value === '') {
+                    value = 0
+                }
                 if (this.zakelijk_reizen.find(fleetTypes => fleetTypes.wagenparkType === fleetType)) {
-                    this.zakelijk_reizen.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.find(f => f.field === field)[type] = event.target.value;
+                    this.zakelijk_reizen.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.find(f => f.field === field)[type] = value;
                 }
                 switch (type) {
                     case 'Aantal': {
@@ -92,7 +97,7 @@ export class DataInvoerComponent implements OnInit {
                     case 'Consumptie': {
                         let totalEmission = 0;
                         const factorvalue = factor.split('kg CO2eq/ltr')[0].replace(',', '.');
-                        this.zakelijk_reizen.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.find(f => f.field === field)['Emissie'] = `${((factorvalue * event.target.value) / 1000).toFixed(2)} ton`;
+                        this.zakelijk_reizen.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.find(f => f.field === field)['Emissie'] = `${((factorvalue * value) / 1000).toFixed(2)} ton`;
                         this.zakelijk_reizen.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.map(fleet => {
                             totalEmission = parseFloat(fleet.Emissie.toString().replace(' ton', '')) + totalEmission;
                         })
@@ -100,7 +105,7 @@ export class DataInvoerComponent implements OnInit {
                     }
                         break;
                     case 'year': {
-                        this.zakelijk_reizen.map(type => type.year = event.target.value)
+                        this.zakelijk_reizen.map(type => type.year = value)
                     }
                 }
                 let status = []
@@ -115,13 +120,20 @@ export class DataInvoerComponent implements OnInit {
                 }else {
                     localStorage.setItem('wagenparkTypeForm','false')
                 }
+                 if(this.wagenparkTypeForm.controls[field+type.toLowerCase()] && this.wagenparkTypeForm.controls[field+type.toLowerCase()].value === ''){
+                     this.wagenparkTypeForm.controls[field+type.toLowerCase()].setValue(0)
+                 }
 
 
             }
                 break;
             case 'woon_werkverkeer': {
+                let value = event.target.value
+                if (value === '') {
+                    value = 0
+                }
                 if (this.woon_werkverkeer.find(fleetTypes => fleetTypes.wagenparkType === fleetType)) {
-                    this.woon_werkverkeer.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.find(f => f.field === field)[type] = event.target.value;
+                    this.woon_werkverkeer.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.find(f => f.field === field)[type] = value;
                 }
                 switch (type) {
                     case 'Aantal': {
@@ -152,7 +164,7 @@ export class DataInvoerComponent implements OnInit {
                             }
                         })
 
-                        this.woon_werkverkeer.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.find(f => f.field === field)['Emissie'] = `${((factorvalue * event.target.value) / 1000).toFixed(2)} ton`;
+                        this.woon_werkverkeer.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.find(f => f.field === field)['Emissie'] = `${((factorvalue * value) / 1000).toFixed(2)} ton`;
 
                         let totalEmission = 0;
                         this.woon_werkverkeer.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.map(fleet => {
@@ -163,7 +175,7 @@ export class DataInvoerComponent implements OnInit {
                     }
                         break;
                     case 'year': {
-                        this.woon_werkverkeer.map(type => type.year = event.target.value)
+                        this.woon_werkverkeer.map(type => type.year = value)
                     }
 
                 }
@@ -179,11 +191,18 @@ export class DataInvoerComponent implements OnInit {
                 }else {
                     localStorage.setItem('woon_werkverkeer_Form','false')
                 }
+                if(this.woon_werkverkeer_Form.controls[field+type.toLowerCase()] && this.woon_werkverkeer_Form.controls[field+type.toLowerCase()].value === ''){
+                    this.woon_werkverkeer_Form.controls[field+type.toLowerCase()].setValue(0)
+                }
             }
                 break;
             case 'declaraties': {
+                let value = event.target.value
+                if (value === '') {
+                    value = 0
+                }
                 if (this.declaraties.find(fleetTypes => fleetTypes.wagenparkType === fleetType)) {
-                    this.declaraties.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.find(f => f.field === field)[type] = event.target.value;
+                    this.declaraties.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.find(f => f.field === field)[type] = value;
                 }
                 switch (type) {
                     case 'Aantal': {
@@ -217,7 +236,7 @@ export class DataInvoerComponent implements OnInit {
                                 factorvalue = factor.split(unit)[0].replace(',', '.');
                             }
                         })
-                        this.declaraties.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.find(f => f.field === field)['Emissie'] = `${((factorvalue * event.target.value) / 1000).toFixed(2)} ton`;
+                        this.declaraties.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.find(f => f.field === field)['Emissie'] = `${((factorvalue * value) / 1000).toFixed(2)} ton`;
                         let totalEmission = 0;
 
                         this.declaraties.find(fleetTypes => fleetTypes.wagenparkType === fleetType).fuelType.map(fleet => {
@@ -227,9 +246,9 @@ export class DataInvoerComponent implements OnInit {
                     }
                         break;
                     case 'year': {
-                        this.declaraties.map(type => type.year = event.target.value)
-                        this.vliegen_defra.year = event.target.value;
-                        this.vliegen.year = event.target.value;
+                        this.declaraties.map(type => type.year = value)
+                        this.vliegen_defra.year = value;
+                        this.vliegen.year = value;
                     }
                 }
                 let status = [];
@@ -242,6 +261,10 @@ export class DataInvoerComponent implements OnInit {
                     localStorage.setItem('declaratiesForm','true')
                 }else {
                     localStorage.setItem('declaratiesForm','false')
+                }
+
+                if(this.declaratiesForm.controls[field+type.toLowerCase()] && this.declaratiesForm.controls[field+type.toLowerCase()].value === ''){
+                    this.declaratiesForm.controls[field+type.toLowerCase()].setValue(0)
                 }
                 break;
             }
@@ -285,9 +308,13 @@ export class DataInvoerComponent implements OnInit {
                 }else {
                     localStorage.setItem('vliegenForm','false')
                 }
+                if(this.declaratiesForm.controls[field+type.toLowerCase()] && this.declaratiesForm.controls[field+type.toLowerCase()].value === ''){
+                    this.declaratiesForm.controls[field+type.toLowerCase()].setValue(0)
+                }
                 break;
             }
             case 'Vliegen': {
+
                 let value = event.target.value
                 if (value === '') {
                     value = 0
@@ -326,7 +353,9 @@ export class DataInvoerComponent implements OnInit {
                     localStorage.setItem('vliegenForm','false')
                 }
 
-
+                if(this.declaratiesForm.controls[field+type.toLowerCase()] && this.declaratiesForm.controls[field+type.toLowerCase()].value === ''){
+                    this.declaratiesForm.controls[field+type.toLowerCase()].setValue(0)
+                }
                 break;
             }
 
@@ -354,19 +383,10 @@ export class DataInvoerComponent implements OnInit {
                 Consumptie: 0,
                 cunit: 'ltr',
                 Factor: '2,74 kg CO2eq/ltr',
+                tooltip:'Brandstoffen voertuigen, WTW, Benzine (E95) (NL)',
                 Emissie: 0
-            }, {
-                type: '2. Geel kenteken - Hybride Benzine:',
-                Aantal: 0,
-                Aandeel: '0%',
-                field: 'hybride_benzine',
-                Kilometrage: 0,
-                Consumptie: 0,
-                cunit: 'ltr',
-                Factor: '2,74 kg CO2eq/ltr',
-                Emissie: 0
-            }, {
-                type: '3. Geel kenteken - Diesel:',
+            },{
+                type: '2. Geel kenteken - Diesel:',
                 field: 'Diesel',
                 Aantal: 0,
                 Aandeel: '0%',
@@ -374,19 +394,10 @@ export class DataInvoerComponent implements OnInit {
                 Consumptie: 0,
                 cunit: 'ltr',
                 Factor: '3,23 kg CO2eq/ltr',
+                tooltip: 'Brandstoffen voertuigen, WTW, Diesel (NL)',
                 Emissie: 0
             }, {
-                type: '4. Geel kenteken - Hybride Diesel:',
-                Aantal: 0,
-                Aandeel: '0%',
-                field: 'hybride_diesel',
-                Kilometrage: 0,
-                Consumptie: 0,
-                cunit: 'ltr',
-                Factor: '3,23 kg CO2eq/ltr',
-                Emissie: 0
-            }, {
-                type: '5. Geel kenteken - LPG:',
+                type: '3. Geel kenteken - LPG:',
                 Aantal: 0,
                 Aandeel: '0%',
                 field: 'LPG',
@@ -394,9 +405,10 @@ export class DataInvoerComponent implements OnInit {
                 Consumptie: 0,
                 cunit: 'ltr',
                 Factor: '1,81 kg CO2eq/ltr',
+                tooltip: 'Brandstoffen voertuigen, WTW, LPG (NL)',
                 Emissie: 0
             }, {
-                type: '6. Geel kenteken - Aardgas/CNG:',
+                type: '4. Geel kenteken - Aardgas/CNG:',
                 Aantal: 0,
                 Aandeel: '0%',
                 field: 'CNG',
@@ -404,9 +416,10 @@ export class DataInvoerComponent implements OnInit {
                 Consumptie: 0,
                 cunit: 'kg',
                 Factor: '2.73 kg CO2eq/ltr',
+                tooltip: 'Brandstoffen voertuigen, WTW, CNG (aardgas) (NL)',
                 Emissie: 0
             }, {
-                type: '7. Geel kenteken - Bio-CNG:',
+                type: '5. Geel kenteken - Bio-CNG:',
                 Aantal: 0,
                 Aandeel: '0%',
                 field: 'bio_CNG',
@@ -414,9 +427,10 @@ export class DataInvoerComponent implements OnInit {
                 Consumptie: 0,
                 cunit: 'kg',
                 Factor: '1,04 kg CO2eq/ltr',
+                tooltip: 'Personenvervoer, Bio-CNG (groengas), Gemiddeld',
                 Emissie: 0
             }, {
-                type: '8. Geel kenteken - 100% elektriciteit:',
+                type: '6. Geel Kenteken - Elektriciteit (Onbekende stroom):',
                 Aantal: 0,
                 Aandeel: '0%',
                 field: 'elektriciteit',
@@ -424,9 +438,10 @@ export class DataInvoerComponent implements OnInit {
                 Consumptie: 0,
                 cunit: 'kwh',
                 Factor: '0,48 kg CO2eq/ltr',
+                tooltip: 'Elektriciteit, Stroom (onbekend)',
                 Emissie: 0
             }, {
-                type: '9. Geel kenteken - elektriciteit (groene stroom):',
+                type: '7. Geel kenteken - elektriciteit (groene stroom):',
                 Aantal: 0,
                 Aandeel: '0%',
                 Kilometrage: 0,
@@ -434,9 +449,10 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kwh',
                 Factor: '0,00 kg CO2eq/ltr',
                 field: 'groene_stroom',
+                tooltip: 'Elektrisch Groene stroom, WTW',
                 Emissie: 0
             }, {
-                type: '10. Geel kenteken - Waterstof (grijze waterstof):',
+                type: '8. Geel kenteken - Waterstof (grijze waterstof):',
                 Aantal: 0,
                 Aandeel: '0%',
                 Kilometrage: 0,
@@ -444,9 +460,10 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kg',
                 Factor: '12 kg CO2eq/ltr',
                 field: 'Waterstof',
+                tooltip: 'Brandstoffen voertuigen en schepen, Waterstof Grijs WTW',
                 Emissie: 0
             }, {
-                type: '11. Geel kenteken - Waterstof (groene waterstof):',
+                type: '9. Geel kenteken - Waterstof (groene waterstof):',
                 Aantal: 0,
                 Aandeel: '0%',
                 Kilometrage: 0,
@@ -454,6 +471,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kg',
                 Factor: '0,76 kg CO2eq/ltr',
                 field: 'groene_waterstof',
+                tooltip: 'Het is van groot belang of de waterstof is geproduceerd via aardgasfractionering of via elektrolyse met groene stroom. De laatste is meer in opkomst en wordt gezien als mogelijkheid om windstroom op te slaan. Gerekend is met een energieinhoud van 120 MJ/kg en 100 gr CO2/MJ voor grijze waterstof en 6,31 gr CO2/MJ voor groene waterstof. Indien waterstof in liters wordt afgerekend, wordt er ongeveer 90,66gr/liter waterstof getankt.',
                 Emissie: 0
             },]
         }, {
@@ -474,19 +492,10 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '2,74 kg CO2eq/ltr',
                 field: 'Benzine',
+                tooltip: 'Brandstoffen voertuigen, WTW, Benzine (E95) (NL)',
                 Emissie: 0
             }, {
-                type: '2. Grijs kenteken - Hybride Benzine:',
-                Aantal: 0,
-                Aandeel: '0%',
-                Kilometrage: 0,
-                Consumptie: 0,
-                cunit: 'ltr',
-                Factor: '2,74 kg CO2eq/ltr',
-                field: 'hybride_benzine',
-                Emissie: 0
-            }, {
-                type: '3. Grijs kenteken - Diesel:',
+                type: '2. Grijs kenteken - Diesel:',
                 Aantal: 0,
                 Aandeel: '0%',
                 Kilometrage: 0,
@@ -494,19 +503,10 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '3,23 kg CO2eq/ltr',
                 field: 'Diesel',
+                tooltip: 'Brandstoffen voertuigen, WTW, Diesel (NL)',
                 Emissie: 0
             }, {
-                type: '4. Grijs kenteken - Hybride Diesel:',
-                Aantal: 0,
-                Aandeel: '0%',
-                Kilometrage: 0,
-                Consumptie: 0,
-                cunit: 'ltr',
-                Factor: '3,23 kg CO2eq/ltr',
-                field: 'hybride_diesel',
-                Emissie: 0
-            }, {
-                type: '5. Grijs kenteken - LPG:',
+                type: '3. Grijs kenteken - LPG:',
                 Aantal: 0,
                 Aandeel: '0%',
                 Kilometrage: 0,
@@ -514,9 +514,10 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kg',
                 Factor: '1,81 kg CO2eq/ltr',
                 field: 'LPG',
+                tooltip: 'Brandstoffen voertuigen, WTW, LPG (NL)',
                 Emissie: 0
             }, {
-                type: '6. Grijs kenteken - Aardgas/CNG:',
+                type: '4. Grijs kenteken - Aardgas/CNG:',
                 Aantal: 0,
                 Aandeel: '0%',
                 Kilometrage: 0,
@@ -524,9 +525,10 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kg',
                 Factor: '2.73 kg CO2eq/ltr',
                 field: 'CNG',
+                tooltip: 'Brandstoffen voertuigen, WTW, Bio-CNG (groengas)',
                 Emissie: 0
             }, {
-                type: '7. Grijs kenteken - Bio-CNG:',
+                type: '5. Grijs kenteken - Bio-CNG:',
                 Aantal: 0,
                 Aandeel: '0%',
                 Kilometrage: 0,
@@ -534,9 +536,10 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kg',
                 Factor: '1,04 kg CO2eq/ltr',
                 field: 'bio_CNG',
+                tooltip: 'Personenvervoer, Bio-CNG (groengas), Gemiddeld',
                 Emissie: 0
             }, {
-                type: '8. Grijs kenteken - 100% elektriciteit:',
+                type: '6. Grijs kenteken - 100% elektriciteit:',
                 Aantal: 0,
                 Aandeel: '0%',
                 Kilometrage: 0,
@@ -544,9 +547,10 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kwh',
                 Factor: '0,48 kg CO2eq/ltr',
                 field: 'elektriciteit',
+                tooltip: 'De uitstoot is 0 indien de Well to Wheel benadering gebruikt wordt. Indien u de CO2 uitstoot t.g.v. de bouw en sloop van windmolens ook wilt meenemen (LCA benadering) dan is deze ca. 14 gram CO2 per kWh (Bron 23).',
                 Emissie: 0
             }, {
-                type: '9. Grijs kenteken - elektriciteit (groene stroom):',
+                type: '7. Grijs kenteken - elektriciteit (groene stroom):',
                 Aantal: 0,
                 Aandeel: '0%',
                 Kilometrage: 0,
@@ -554,9 +558,10 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kwh',
                 Factor: '0.00 kg CO2eq/ltr',
                 field: 'groene_stroom',
+                tooltip: 'WTW Groene stroom: Windkracht, Waterkracht, Zonne-energie',
                 Emissie: 0
             }, {
-                type: '10. Grijs kenteken - Waterstof (grijze waterstof):',
+                type: '8. Grijs kenteken - Waterstof (grijze waterstof):',
                 Aantal: 0,
                 Aandeel: '0%',
                 Kilometrage: 0,
@@ -564,9 +569,10 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kg',
                 Factor: '12 kg CO2eq/ltr',
                 field: 'grijze_waterstof',
+                tooltip: 'Brandstoffen voertuigen en schepen, Waterstof Grijs WTW',
                 Emissie: 0
             }, {
-                type: '11. Grijs kenteken - Waterstof (groene waterstof):',
+                type: '9. Grijs kenteken - Waterstof (groene waterstof):',
                 Aantal: 0,
                 Aandeel: '0%',
                 Kilometrage: 0,
@@ -574,9 +580,10 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kg',
                 field: 'groene_waterstof',
                 Factor: '0,76 kg CO2eq/ltr',
+                tooltip: 'Het is van groot belang of de waterstof is geproduceerd via aardgasfractionering of via elektrolyse met groene stroom. De laatste is meer in opkomst en wordt gezien als mogelijkheid om windstroom op te slaan. Gerekend is met een energieinhoud van 120 MJ/kg en 100 gr CO2/MJ voor grijze waterstof en 6,31 gr CO2/MJ voor groene waterstof. Indien waterstof in liters wordt afgerekend, wordt er ongeveer 90,66gr/liter waterstof getankt.',
                 Emissie: 0
             }, {
-                type: '12. (Elektrische) leasefiets):',
+                type: '10. (Elektrische) leasefiets):',
                 Aantal: 0,
                 Aandeel: '0%',
                 Kilometrage: 0,
@@ -584,6 +591,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kwh',
                 field: 'elektrische_leasefiets',
                 Factor: '0,01 kg CO2eq/ltr',
+                tooltip: 'Personenvervoer, fiets, elektrisch, grijze stroom, WTW',
                 Emissie: 0
             },]
         }]
@@ -597,34 +605,39 @@ export class DataInvoerComponent implements OnInit {
                     Kilometrage: 0,
                     Factor: '0,25 kg CO2eq/ltr',
                     Emissie: 0,
-                    type: 'Regionaal Economy < 460 km (DEFRA)'
+                    type: 'Regionaal Economy < 460 km (DEFRA)',
+                    tooltip:'Personenvervoer, Vliegtuig, regionaal economy <460 km, WTW (incl radiative forcing)',
                 },
                 {
                     field: 'short_haul_economy',
                     Kilometrage: 0,
                     Factor: '0,16 kg CO2eq/ltr',
                     Emissie: 0,
-                    type: 'Short-haul Economy < 3700 km (DEFRA)'
+                    type: 'Short-haul Economy < 3700 km (DEFRA)',
+                    tooltip: 'Personenvervoer, Vliegtuig, short-haul economy >460 - <3700 km, WTW (incl radiative forcing)',
                 },
                 {
                     field: 'long_haul_economy',
                     Kilometrage: 0,
                     Factor: '0,15 kg CO2eq/ltr',
                     Emissie: 0,
-                    type: 'Long-haul Economy > 3700 km (DEFRA)'
+                    type: 'Long-haul Economy > 3700 km (DEFRA)',
+                    tooltip: 'Personenvervoer, Vliegtuig, long-haul Economy >3700 km, WTW (incl radiative forcing)'
                 }, {
                     field: 'short_shaul_businessclass',
                     Kilometrage: 0,
                     Factor: '0,23 kg CO2eq/ltr',
                     Emissie: 0,
-                    type: 'Short-haul Businessclass < 3700 km (DEFRA)'
+                    type: 'Short-haul Businessclass < 3700 km (DEFRA)',
+                    tooltip: 'Personenvervoer, Vliegtuig, short-haul business >460 - <3700 km, WTW (incl radiative forcing)'
                 },
                 {
                     field: 'long_haul_businessclass',
                     Kilometrage: 0,
                     Factor: '0,43 kg CO2eq/ltr',
                     Emissie: 0,
-                    type: 'Long-haul Businessclass > 3700 km (DEFRA)'
+                    type: 'Long-haul Businessclass > 3700 km (DEFRA)',
+                    tooltip: 'Personenvervoer, Vliegtuig, long-haul business >3700 km, WTW (incl radiative forcing)'
                 },
             ]
         }
@@ -643,21 +656,24 @@ export class DataInvoerComponent implements OnInit {
                             Factor: '0,30 kg CO2eq/ltr',
                             Emissie: 0,
                             field: 'regionaal_economy',
-                            type: 'Regionaal Economy < 700 km'
+                            type: 'Regionaal Economy < 700 km',
+                            tooltip:'Personenvervoer, Vliegtuig, Regionaal < 700 km, WTW (incl radiative forcing)'
                         },
                         {
                             Kilometrage: 0,
                             Factor: '0,20 kg CO2eq/ltr',
                             Emissie: 0,
                             field: 'europees_economy',
-                            type: 'Europees Economy 700 - 2.500 km'
+                            type: 'Europees Economy 700 - 2.500 km',
+                            tooltip: 'Personenvervoer, Vliegtuig, Europees 700 - 2.500 km, WTW (incl radiative forcing)'
                         },
                         {
                             Kilometrage: 0,
                             Factor: '0,15 kg CO2eq/ltr',
                             Emissie: 0,
                             field: 'intercontinentaal_economy',
-                            type: 'Intercontinentaal Economy > 2.500 km'
+                            type: 'Intercontinentaal Economy > 2.500 km',
+                            tooltip: 'Personenvervoer, Vliegtuig, Intercontinentaal > 2.500 km, WTW (incl radiative forcing)'
                         }]
             }
         this.woon_werkverkeer = [{
@@ -677,6 +693,7 @@ export class DataInvoerComponent implements OnInit {
                 Kilometrage: 0,
                 Consumptie: '',
                 cunit: 'ltr',
+                tooltip:'Personenvervoer, Benzine, Middel, WTW',
                 Factor: '0.20 kg CO2eq/km',
                 Emissie: 0
             }, {
@@ -688,6 +705,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.15 kg CO2eq/km',
                 field: 'hybride_benzine',
+                tooltip: 'Personenvervoer, Benzine, Hybride, WTW',
                 Emissie: 0
             }, {
                 type: '3. Diesel:',
@@ -698,6 +716,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.18 kg CO2eq/km',
                 field: 'diesel',
+                tooltip: 'Personenvervoer, Diesel, Middel, WTW',
                 Emissie: 0
             }, {
                 type: '4. Hybride Diesel:',
@@ -708,6 +727,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.17 kg CO2eq/km',
                 field: 'hybride_diesel',
+                tooltip: 'Personenvervoer, Diesel, Hybride, WTW',
                 Emissie: 0
             }, {
                 type: '5. LPG:',
@@ -718,6 +738,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.15 kg CO2eq/km',
                 field: 'LPG',
+                tooltip: 'Personenvervoer, LPG, Middel, WTW',
                 Emissie: 0
             }, {
                 type: '6. Aardgas/CNG:',
@@ -728,6 +749,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.17 kg CO2eq/ltr',
                 field: 'CNG',
+                tooltip: 'Personenvervoer, Aardgas/ CNG, Middel, WTW',
                 Emissie: 0
             }, {
                 type: '7. Bio-CNG:',
@@ -738,6 +760,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kg',
                 Factor: '0.04 kg CO2eq/km',
                 field: 'Bio_CNG',
+                tooltip: 'Personenvervoer, Bio-CNG, Gemiddeld, WTW',
                 Emissie: 0
             }, {
                 type: '8. Elektriciteit:',
@@ -748,6 +771,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kwh',
                 Factor: '0.08 kg CO2eq/ltr',
                 field: 'elektriciteit',
+                tooltip: 'Personenvervoer, Elektrisch, Gemiddelde stroommix, middel, WTW',
                 Emissie: 0
             }, {
                 type: '9. Carpool:',
@@ -758,6 +782,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.10 kg CO2eq/km',
                 Emissie: 0,
+                tooltip: 'Personenvervoer, Brandstofsoort onbekend, Gewichtsklasse onbekend, WTW, delen door 2 ivm min 2 passagiers',
                 field: 'groene_stroom',
             }, {
                 type: '10. Motor/scooter:',
@@ -768,6 +793,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.18 kg CO2eq/km',
                 Emissie: 0,
+                tooltip: 'Personenvervoer, Auto, Benzine, Klein, WTW Bij gebrek aan emissiefactor voor motor/scooter',
                 field: 'grijze_waterstof',
             }, {
                 type: '11. Fietsen/lopen:',
@@ -778,6 +804,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.01 kg CO2eq/km',
                 Emissie: 0,
+                tooltip: 'Personenvervoer, Fiets Elektrisch, Grijze stroom, WTW, Conservatieve insteek dat iedereen met de elektrische fiets gaat op grijze stroom.',
                 field: 'Fietsen',
             }, {
                 type: '12. OV:',
@@ -788,6 +815,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kwh',
                 Factor: '0.04 kg CO2eq/km',
                 Emissie: 0,
+                tooltip: 'Personenvervoer, OV algemeen, WTW',
                 field: 'OV',
             }, {
                 type: '13. Vermeden door thuiswerken:',
@@ -799,6 +827,7 @@ export class DataInvoerComponent implements OnInit {
                 Factor: '0.00 kg CO2eq/KWH',
                 Emissie: 0,
                 field: 'thuiswerken',
+                tooltip: ''
             },]
         }]
         this.declaraties = [{
@@ -821,6 +850,7 @@ export class DataInvoerComponent implements OnInit {
                 Factor: '0.20 kg CO2eq/km',
                 Emissie: 0,
                 field: 'Benzine',
+                tooltip: 'Personenvervoer, Benzine, Middel, WTW'
             }, {
                 type: '2. Hybride Benzine:',
                 Aantal: 0,
@@ -831,6 +861,7 @@ export class DataInvoerComponent implements OnInit {
                 Factor: '0.15 kg CO2eq/km',
                 Emissie: 0,
                 field: 'hybride_benzine',
+                tooltip: 'Personenvervoer, Benzine, Hybride, WTW'
             }, {
                 type: '3. Diesel:',
                 Aantal: 0,
@@ -840,7 +871,8 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.18 kg CO2eq/km',
                 field: 'diesel',
-                Emissie: 0
+                Emissie: 0,
+                tooltip: 'Personenvervoer, Diesel, Middel, WTW'
             }, {
                 type: '4. Hybride Diesel:',
                 Aantal: 0,
@@ -850,7 +882,8 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.17 kg CO2eq/km',
                 field: 'hybride_diesel',
-                Emissie: 0
+                Emissie: 0,
+                tooltip: 'Personenvervoer, Diesel, Hybride, WTW'
             }, {
                 type: '5. LPG:',
                 Aantal: 0,
@@ -860,7 +893,8 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.15 kg CO2eq/km',
                 field: 'LPG',
-                Emissie: 0
+                Emissie: 0,
+                tooltip: 'Personenvervoer, LPG, Middel, WTW'
             }, {
                 type: '6. Aardgas/CNG:',
                 Aantal: 0,
@@ -870,7 +904,8 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kg',
                 Factor: '0.17 kg CO2eq/km',
                 field: 'CNG',
-                Emissie: 0
+                Emissie: 0,
+                tooltip: 'Personenvervoer, Aardgas/ CNG, Middel, WTW'
             }, {
                 type: '7. Bio-CNG:',
                 Aantal: 0,
@@ -880,7 +915,8 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kg',
                 Factor: '0.04 kg CO2eq/km',
                 field: 'bio_CNG',
-                Emissie: 0
+                Emissie: 0,
+                tooltip: 'Personenvervoer, Bio-CNG, Gemiddeld, WTW'
             }, {
                 type: '8. Taxi\'s (diesel):',
                 Aantal: 0,
@@ -890,7 +926,8 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.18 kg CO2eq/km',
                 field: 'Taxi',
-                Emissie: 0
+                Emissie: 0,
+                tooltip: 'Personenvervoer, Diesel, Middel, WTW',
             }, {
                 type: '9. Elektriciteit:',
                 Aantal: 0,
@@ -900,6 +937,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kwh',
                 Factor: '0.08 kg CO2eq/km',
                 field: 'Elektriciteit',
+                tooltip: 'Personenvervoer, Elektrisch, Gemiddelde stroommix, middel, WTW',
                 Emissie: 0
             }, {
                 type: '10. Fiets / e-bike:',
@@ -910,6 +948,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'kwh',
                 field: 'e_bike',
                 Factor: '0.01 kg CO2eq/km',
+                tooltip: 'Personenvervoer, fiets, elektrisch, grijze stroom, WTW',
                 Emissie: 0
             }]
         }, {
@@ -934,7 +973,7 @@ export class DataInvoerComponent implements OnInit {
                     }
                 ]
             },
-            wagenparkType: '4. OV Reizen.',
+            wagenparkType: '4. OV Reizen',
             submitstring: 'Declaraties OV-reizen opslaan',
             year: 0,
             fuelType: [{
@@ -946,6 +985,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.04 kg CO2eq/km',
                 field: 'OV_reizen',
+                tooltip: 'Personenvervoer, OV algemeen, WTW',
                 Emissie: 0
             }, {
                 type: '2. Internationale treinreizen:',
@@ -956,6 +996,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.03 kg CO2eq/km',
                 field: 'treinreizen',
+                tooltip: 'Personenvervoer, Trein internationaal, WTW',
                 Emissie: 0
             }, {
                 type: '3. Post paid OV (Mobiliteitskaart):',
@@ -966,6 +1007,7 @@ export class DataInvoerComponent implements OnInit {
                 cunit: 'ltr',
                 Factor: '0.04 kg CO2eq/km',
                 field: 'Mobiliteitskaart',
+                tooltip:'Personenvervoer, OV algemeen, WTW',
                 Emissie: 0
             }]
         }]

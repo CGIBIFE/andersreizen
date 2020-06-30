@@ -27,6 +27,7 @@ import {AuthService} from "./service/auth.service";
 import { GuidelinesComponent } from './guidelines/guidelines.component';
 import { CbsNumbersComponent } from './cbs-numbers/cbs-numbers.component';
 export const isMock = environment.mock;
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ export const isMock = environment.mock;
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

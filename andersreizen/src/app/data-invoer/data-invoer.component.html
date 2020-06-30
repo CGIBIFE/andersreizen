@@ -51,15 +51,15 @@
                                                                                     [value]="fuelType.Kilometrage"
                                                                                     placeholder="7667786.78"
                                                                                     (change)="updateField($event,fuelType.field,'Kilometrage','zakelijk_reizen', data.wagenparkType)"
-                                                                                    [fieldName]="fuelType.field+'Kilometrage'"
+                                                                                    [fieldName]="fuelType.field+'kilometrage'"
                                                                                     [fGroup]="wagenparkTypeForm"
                                                                                     unit="KM"></app-input-field>
                                                                    <app-input-field type="number" label="Consumptie:"
-                                                                                    placeholder="56766.78"
+                                                                                    placeholder="0"
                                                                                     [value]="fuelType.Consumptie"
                                                                                     (change)="updateField($event,fuelType.field,'Consumptie','zakelijk_reizen', data.wagenparkType,fuelType.Factor)"
                                                                                     [required]="true"
-                                                                                    [fieldName]="fuelType.field+'Consumptie'"
+                                                                                    [fieldName]="fuelType.field+'consumptie'"
                                                                                     [fGroup]="wagenparkTypeForm"
                                                                                     [unit]="fuelType.cunit"></app-input-field>
                                                                   <app-input-field type="text" label="Factor:"
@@ -68,6 +68,8 @@
                                                                                    [fieldName]="fuelType.field+'Factor'"
                                                                                    [fGroup]="wagenparkTypeForm"
                                                                                    [value]="fuelType.Factor"
+                                                                                   [tooltipText]="fuelType.tooltip"
+                                                                                   [tooltip]="true"
                                                                                    disabled="true"></app-input-field>
                                                                   <app-input-field type="text" label="Emissie (CO2eq):"
                                                                                    placeholder="14209,31 ton"
@@ -168,16 +170,16 @@
                                                                                      [value]="fuelType.Aandeel"></app-input-field>
                                                                    <app-input-field type="number" label="Kilometrage:"
                                                                                     [value]="fuelType.Kilometrage"
-                                                                                    [fieldName]="fuelType.field+'Kilometrage'"
+                                                                                    [fieldName]="fuelType.field+'kilometrage'"
                                                                                     [fGroup]="woon_werkverkeer_Form"
                                                                                     (change)="updateField($event,fuelType.field,'Kilometrage','woon_werkverkeer', data.wagenparkType,fuelType.Factor)"
                                                                                     placeholder="7667786.78"
                                                                                     [required]="true"
                                                                                     unit="KM"></app-input-field>
                                                                    <app-input-field type="number" label="Consumptie:"
-                                                                                    placeholder="56766.78"
+                                                                                    placeholder="0"
                                                                                     [value]="fuelType.Consumptie"
-                                                                                    [fieldName]="fuelType.field+'Consumptie'"
+                                                                                    [fieldName]="fuelType.field+'consumptie'"
                                                                                     [fGroup]="woon_werkverkeer_Form"
                                                                                     (change)="updateField($event,fuelType.field,'Consumptie','woon_werkverkeer', data.wagenparkType, fuelType.Factor)"
                                                                                     [unit]="fuelType.cunit"></app-input-field>
@@ -186,6 +188,8 @@
                                                                                    [fieldName]="fuelType.field+'Factor'"
                                                                                    [fGroup]="woon_werkverkeer_Form"
                                                                                    [value]="fuelType.Factor"
+                                                                                   [tooltipText]="fuelType.tooltip"
+                                                                                   [tooltip]="true"
                                                                                    disabled="true"></app-input-field>
                                                                   <app-input-field type="text" label="Emissie (CO2eq):"
                                                                                    [fieldName]="fuelType.field+'Emissie'"
@@ -292,22 +296,24 @@
                                                                    <app-input-field type="number" label="Kilometrage:"
                                                                                     [value]="fuelType.Kilometrage"
                                                                                     (change)="updateField($event,fuelType.field,'Kilometrage','declaraties', data.wagenparkType, fuelType.Factor)"
-                                                                                    [fieldName]="fuelType.field+'Kilometrage'"
+                                                                                    [fieldName]="fuelType.field+'kilometrage'"
                                                                                     [fGroup]="declaratiesForm"
                                                                                     [required]="true"
                                                                                     placeholder="7667786.78"
                                                                                     unit="KM"></app-input-field>
                                                                    <app-input-field type="number" label="Consumptie:"
                                                                                     [value]="fuelType.Consumptie"
-                                                                                    [fieldName]="fuelType.field+'Consumptie'"
+                                                                                    [fieldName]="fuelType.field+'consumptie'"
                                                                                     [fGroup]="declaratiesForm"
                                                                                     (change)="updateField($event,fuelType.field,'Consumptie','declaraties', data.wagenparkType)"
-                                                                                    placeholder="56766.78"
+                                                                                    placeholder="0"
                                                                                     [unit]="fuelType.cunit"></app-input-field>
                                                                   <app-input-field type="text" label="Factor:"
                                                                                    placeholder="2.74 kg CO2eq/ltr"
                                                                                    [value]="fuelType.Factor"
                                                                                    [fieldName]="fuelType.field+'Factor'"
+                                                                                   [tooltipText]="fuelType.tooltip"
+                                                                                   [tooltip]="true"
                                                                                    [fGroup]="declaratiesForm"
                                                                                    disabled="true"></app-input-field>
                                                                   <app-input-field type="text" label="Emissie (CO2eq):"
@@ -398,7 +404,7 @@
                                 <app-input-field type="number" label="Kilometrage:"
                                                  placeholder=""
                                                  [disabled]="vliegen_defra_disable"
-                                                 [fieldName]="data.field+'Kilometrage'"
+                                                 [fieldName]="data.field+'kilometrage'"
                                                  [fGroup]="declaratiesForm"
                                                  (change)="updateField($event,data.field,'Kilometrage','DEFRA', data.type, data.Factor)"
                                                  [value]="data.Kilometrage"></app-input-field>
@@ -407,6 +413,8 @@
                                                  [fieldName]="data.field+'Factor'"
                                                  [fGroup]="declaratiesForm"
                                                  [value]="data.Factor"
+                                                 [tooltipText]="data.tooltip"
+                                                 [tooltip]="true"
                                                  disabled="true"></app-input-field>
                                 <app-input-field type="text" label="Emissie (CO2eq):"
                                                  placeholder="14209,31 ton"
@@ -424,7 +432,7 @@
 
                         </div>
                         <div class="col-4 p-0 ml-3">
-                            <app-content-panel title="5. Vliegen" [fullTitleBar]="true">
+                            <app-content-panel title="5. Vliegen - C02 emissiefactoren" [fullTitleBar]="true">
 
                             <span *ngFor="let data of vliegen.fuelType;">
                                <h2 class="and-h2-normal">{{data.type}}</h2>
@@ -432,7 +440,7 @@
                                 <app-input-field type="number" label="Kilometrage:"
                                                  placeholder=""
                                                  [disabled]="vliegen_disable"
-                                                 [fieldName]="data.field+'Kilometrage'"
+                                                 [fieldName]="data.field+'kilometrage'"
                                                  (change)="updateField($event,data.field,'Kilometrage','Vliegen', data.type, data.Factor)"
                                                  [fGroup]="declaratiesForm"
                                                  [value]="data.Kilometrage"></app-input-field>
@@ -441,6 +449,8 @@
                                                  [fieldName]="data.field+'Factor'"
                                                  [fGroup]="declaratiesForm"
                                                  [value]="data.Factor"
+                                                 [tooltipText]="data.tooltip"
+                                                 [tooltip]="true"
                                                  disabled="true"></app-input-field>
                                 <app-input-field type="text" label="Emissie (CO2eq):"
                                                  [fieldName]="data.field+'Emissie'"

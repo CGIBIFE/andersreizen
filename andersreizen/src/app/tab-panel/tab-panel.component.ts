@@ -31,7 +31,7 @@ export class TabPanelComponent implements OnInit {
           this.tab = tab;
         }
       }
-      case '3. Declaraties': {
+      case '3. Zakelijk verkeer': {
         if(localStorage.getItem('declaratiesForm') === 'true' || localStorage.getItem('vliegenForm') === 'true'){
           alert(`Sla eerst je gegevens op van ${previousTab} voordat je naar de volgende pagina gaat.`)
         } else {
